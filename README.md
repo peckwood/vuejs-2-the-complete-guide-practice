@@ -55,3 +55,68 @@ You can use v-once to lock initial value
 <p v-once>Initial counter: {{ counter }}</p>
 ```
 
+### 28. Methods used for Data Binding: How It Works
+
+You can use methods to display content based on variable, but it has one drawback
+
+```
+<p>Your Name: {{ outputFullname() }}</p>
+```
+
+```js
+    outputFullname(){
+      console.log('I run when counter is changed')
+      if(this.name === ''){
+        return '';
+      }else{
+        return this.name + ' Liu';
+      }
+    }
+```
+
+Whenever other variables are updated, outputFullname is also called
+
+Whenever anything on the page changes, Vue executes any method you're using in your HTML code between {}, or with v-html, or with v-html, so any non-event bound method will be re-executed.
+
+### 29. Introducing Computed Properties
+
+Computed properties are like methods, but Vue is aware of their dependencies and only re-executes them if one of them change. 
+
+We use them like data properties.
+
+We don't use them like methods.
+
+It's better to use computed properties then methods for outputting values, performance-wise
+
+### 30. watchers
+
+watcher name must match data property or computed property name
+
+computed property are better when there are multiple dependencies
+
+Watchers scenarios:
+
+- something may or may not happen when value changes
+- send http requests if certain values change
+- timers if certain values change
+
+### 31 methods vs computed vs watch
+
+### methods
+
+- can use with event-binding or data-binding
+- for data-binding , method is executed for every re-render, which is probably bad
+- So, use for events or data that really needs to be re-evaluated all the time
+
+#### computed
+
+- data-binding
+- only re-evaluated when one of their 'used value' change
+- use for data that depends on other data
+
+#### watch
+
+- not used directly in template, but you can watch any property, even computed properties with them
+- allow you to run any code in reaction to some changed data
+- use for any non-data update you want to make
+
