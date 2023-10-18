@@ -6,6 +6,23 @@ Vue.createApp({
             box3Selected: false
         }
     },
+    computed: {
+        box1Class() {
+            return {
+                active: this.box1Selected
+            }
+        },
+        box2Class() {
+            return {
+                active: this.box2Selected
+            }
+        },
+        box3Class() {
+            return {
+                active: this.box3Selected
+            }
+        }
+    },
     methods: {
         onClickBox(box){
             if(box === 1){

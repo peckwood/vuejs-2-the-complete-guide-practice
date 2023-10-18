@@ -144,6 +144,26 @@ Vue has a special binding syntax that allow you to change inline style dynamical
       ></div>
 ```
 
+### 35 Classes & Computed Properties
+
+```
+      <div
+              class="demo"
+              :class="box1Class"
+              @click="onClickBox(1)"
+      ></div>
+```
+
+```
+    computed: {
+        box1Class() {
+            return {
+                active: this.box1Selected
+            }
+        }
+    },
+```
+
 
 
 
