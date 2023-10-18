@@ -164,6 +164,12 @@ Vue has a special binding syntax that allow you to change inline style dynamical
     },
 ```
 
+### 36 Dynamic Classes: Array Syntax
+
+```
+:class="['demo', {active: this.box2Selected}]"
+```
+
 
 
 
