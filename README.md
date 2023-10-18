@@ -128,5 +128,13 @@ Watchers scenarios:
 
 ### 33 Dynamic Styling with Inline Styles (code: basics-10)
 
+Vue has a special binding syntax that allow you to change inline style dynamically
+
+```
+:style="{'border-color': box1Selected ? 'red' : '#ccc'}"
+```
+
+
+
 
 
