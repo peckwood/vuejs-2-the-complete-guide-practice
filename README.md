@@ -134,6 +134,16 @@ Vue has a special binding syntax that allow you to change inline style dynamical
 :style="{'border-color': box1Selected ? 'red' : '#ccc'}"
 ```
 
+### 34  Adding CSS Classes Dynamically
+
+```
+      <div
+              class="demo"
+              :class="{active: box2Selected}"
+              @click="onClickBox(2)"
+      ></div>
+```
+
 
 
 
