@@ -1,14 +1,18 @@
 # Section 1 Getting Started
 
-## gs-01-starting-project
+### 5 Building A First App With Just JavaScript  (code:  gs-01)
 
 is a web application where you can add goals to a goal list.
 
 First show how to do it with JS, then shows how to do it with Vue.
 
+### 7 Re-building the app with Vue
 
+# Section 2 Basics and Core Concepts - DOM Interaction with Vue
 
-### basics-03-events-starting-code
+### 14 (basics-01)
+
+### 21 Understanding Event Binding (code: basics-03)
 
 ### 25 Explore Event Modifiers
 
@@ -47,13 +51,15 @@ The following event will trigger when enter key is up
 <input type="text" @input="setName1($event, 'Liu')" @keyup.enter="confirmInput"/>
 ```
 
-26. ### Locking Content with v-once
+### 26 Locking Content with v-once
 
 You can use v-once to lock initial value
 
 ```
 <p v-once>Initial counter: {{ counter }}</p>
 ```
+
+### 27 Data Binding + Event Binding = Two-Way Binding (code: basics-05)
 
 ### 28. Methods used for Data Binding: How It Works
 
@@ -102,7 +108,7 @@ Watchers scenarios:
 
 ### 31 methods vs computed vs watch
 
-### methods
+#### methods
 
 - can use with event-binding or data-binding
 - for data-binding , method is executed for every re-render, which is probably bad
@@ -119,4 +125,8 @@ Watchers scenarios:
 - not used directly in template, but you can watch any property, even computed properties with them
 - allow you to run any code in reaction to some changed data
 - use for any non-data update you want to make
+
+### 33 Dynamic Styling with Inline Styles (code: basics-10)
+
+
 
