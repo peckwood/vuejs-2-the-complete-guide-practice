@@ -170,7 +170,7 @@ Vue has a special binding syntax that allow you to change inline style dynamical
 :class="['demo', {active: this.box2Selected}]"
 ```
 
-
+### Assignment 4: Time to Practice: Dynamic Styling
 
 
 
