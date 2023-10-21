@@ -12,6 +12,8 @@ v-if and v-show difference: v-if removes and adds elements from and to the DOM, 
 
 You should typically use v-if and only fall back to v-show if you have an element which visibility status changes a lot
 
+If you need v-for and v-if, **dont use them on the same element**. Use a wrapper with v-if instead.
+
 ### 44 Rendering Lists of Data
 
 ```
@@ -48,7 +50,7 @@ You can use the `.stop` modifier to stop propagation to parent element
 <input type="text" @click.stop/>
 ```
 
-You should make it a habit to use key to uniquely identify every item, which prevents bugs
+Vue re-uses DOM elements to optimize performance and it can cause bugs. You should make it a habit to use `:key` to uniquely identify every item, which prevents bugs.
 
 index is not ideal for keys as they are not attached to the element. A good example would be database primary keys.
 
@@ -62,3 +64,4 @@ index is not ideal for keys as they are not attached to the element. A good exam
         </li>
 ```
 
+### Assignment: Time to Practice: Conditional Content & Lists (lists-cond-assignment-problem)
