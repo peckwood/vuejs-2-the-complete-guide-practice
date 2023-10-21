@@ -40,3 +40,25 @@ You should typically use v-if and only fall back to v-show if you have an elemen
 
 ### 46 Removing List Items
 
+### 47 Lists & Keys
+
+You can use the `.stop` modifier to stop propagation to parent element
+
+```
+<input type="text" @click.stop/>
+```
+
+You should make it a habit to use key to uniquely identify every item, which prevents bugs
+
+index is not ideal for keys as they are not attached to the element. A good example would be database primary keys.
+
+```
+<li v-for="(goal, index) in this.goals"
+            @click="removeGoal(index)"
+            :key="goal"
+        >
+          <p>{{ index }} - {{ goal }}</p>
+          <input type="text" @click.stop/>
+        </li>
+```
+
