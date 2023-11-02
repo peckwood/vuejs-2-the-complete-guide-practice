@@ -78,3 +78,39 @@ To import a default export:
 ```
 import App from "./App.vue";
 ```
+
+### 86 adding a component
+
+#### components are usually in src/components folder
+
+#### name your component PascalCase, it is most common
+
+#### how to add component
+
+approach 1: inside component:
+
+```
+<script>
+import FriendContact from "@/components/FriendContact.vue";
+export default {
+  components: {FriendContact},
+  data(){
+  // ...
+```
+
+approach 2: inside js:
+
+```
+import { createApp } from 'vue';
+// 注意这里不要大括号
+import App from "./App.vue";
+import FriendContact from "@/components/FriendContact.vue";
+
+const app = createApp(App)
+
+app.component('FriendContact', FriendContact);
+app.mount('#app');
+```
+
+### 87 add styling
+
