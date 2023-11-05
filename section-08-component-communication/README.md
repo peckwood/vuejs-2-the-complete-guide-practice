@@ -74,6 +74,8 @@ If we miss required prop, we will get a warning in console
 
 ### 98 Defining & Validating Custom Events
 
+You can define custom events just like props, but it is not required like props, it is recommended.
+
 emits property lists what event can you emit
 
 ```
@@ -93,4 +95,4 @@ You can validate emits:
     }
 ```
 
-When you $emit, and the event argument doesn't pass validation, a warning will appear in console
+newVal is emit data, which is checked for validation. When you actually do $emit, and the event argument doesn't pass validation, a warning will appear in console: `Invalid event arguments`
