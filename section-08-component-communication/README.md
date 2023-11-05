@@ -96,3 +96,17 @@ You can validate emits:
 ```
 
 newVal is emit data, which is checked for validation. When you actually do $emit, and the event argument doesn't pass validation, a warning will appear in console: `Invalid event arguments`
+
+### 99-1 prop event fallthrough
+
+A "fallthrough attribute" is an attribute or `v-on` event listener that is passed to a component, but is not explicitly declared in the receiving component's [props](https://vuejs.org/guide/components/props) or [emits](https://vuejs.org/guide/components/events#declaring-emitted-events). Common examples of this include `class`, `style`, and `id` attributes.
+
+When a component renders a single root element, fallthrough attributes will be **automatically** added to the **root element**'s attributes.
+
+This can be handy to build "utility" or pure presentational components where you don't want to define all props and events individually.
+
+If you do **not** want a component to automatically inherit attributes, you can set `inheritAttrs: false` in the component's options.
+
+#### Note:
+
+- Unlike props, fallthrough attributes preserve their original casing in JavaScript, so an attribute like `foo-bar` needs to be accessed as `$attrs['foo-bar']`.
