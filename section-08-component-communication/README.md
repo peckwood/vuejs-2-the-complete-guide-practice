@@ -110,3 +110,30 @@ If you do **not** want a component to automatically inherit attributes, you can 
 #### Note:
 
 - Unlike props, fallthrough attributes preserve their original casing in JavaScript, so an attribute like `foo-bar` needs to be accessed as `$attrs['foo-bar']`.
+
+### Assignment 6
+
+#### Note
+
+1. declare components inside an object, not an array
+
+   ```
+   components: { Comp1, Comp2 }
+   ```
+
+2. do not emit existing event:
+
+   ```
+   <form @submit.prevent="submitForm">
+   ```
+
+   ```
+       submitForm(){
+         const newUserCopy = {...this.newUser};
+         this.$emit('submit', newUserCopy);
+       }
+   ```
+
+   is wrong, replace `submit` with some other custom event name
+
+3. 

@@ -11,9 +11,9 @@
     <button>Submit</button>
   </form>
 </template>
-<script>
 
-export default ({
+<script>
+export default {
   data(){
     return {
       newUser: {
@@ -25,10 +25,10 @@ export default ({
   methods: {
     submitForm(){
       const newUserCopy = {...this.newUser};
-      this.$emit('submit', newUserCopy);
+      this.$emit('submit2', newUserCopy);
     }
   }
-})
+};
 </script>
 
 

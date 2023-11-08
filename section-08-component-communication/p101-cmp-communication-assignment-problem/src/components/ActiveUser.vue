@@ -6,9 +6,9 @@
 </template>
 <script>
 
-export default ({
+export default {
   props: ['username', 'age']
-})
+};
 </script>
 
 <style scoped>
