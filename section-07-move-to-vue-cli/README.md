@@ -87,7 +87,11 @@ import App from "./App.vue";
 
 #### how to add component
 
+or register component or declare component
+
 approach 1: inside component:
+
+注意是**大括号**
 
 ```
 <script>
@@ -102,7 +106,7 @@ approach 2: inside js:
 
 ```
 import { createApp } from 'vue';
-// 注意这里不要大括号
+// 注意这里不要大括号, 大括号是为了named export
 import App from "./App.vue";
 import FriendContact from "@/components/FriendContact.vue";
 
