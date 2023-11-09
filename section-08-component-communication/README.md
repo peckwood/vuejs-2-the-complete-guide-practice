@@ -141,3 +141,34 @@ If you do **not** want a component to automatically inherit attributes, you can 
 You can use provide and inject. a pattern you can use to provide data in one place and inject it, which means use it, in another place.
 
 You can only inject what has been provided in an **accestor** component of current component
+
+In ancestor component:
+
+```
+  provide: {
+	myObj: {
+		prop1: 'value1'
+	}
+  },
+```
+
+access in child component:
+
+```
+inject: ['myObj'],
+```
+
+The Basics: you can not access prop1 with `this.myObj`
+
+**Note:** If you already have `myObj` in ancestor as a data property, you can reuse it.
+
+```
+provide() {
+	return {
+		myObj: this.myObj
+	}
+}
+```
+
+**Note:** If the data in provide is changed, child's injected data is also changed
+
