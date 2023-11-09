@@ -136,7 +136,7 @@ If you do **not** want a component to automatically inherit attributes, you can 
 
    is wrong, replace `submit` with some other custom event name
 
-### 103 provide and inject
+### 103 provide and inject for data
 
 You can use provide and inject. a pattern you can use to provide data in one place and inject it, which means use it, in another place.
 
@@ -171,4 +171,54 @@ provide() {
 ```
 
 **Note:** If the data in provide is changed, child's injected data is also changed
+
+### 105 provide and inject for methods
+
+You might have to emit all the way from child to ancestor, but you can use project and inject to pass a method from ancestor to child
+
+ancestor:
+
+```
+  provide() {
+    return {
+      topics: this.topics2,
+      selectTopic: this.activateTopic
+    };
+  },
+  methods: {
+    activateTopic(topicId) {
+      this.activeTopic = this.topics2.find((topic) => topic.id === topicId);
+    },
+  },
+```
+
+child:
+
+```
+<button @click="selectTopic(id)">Learn More</button>
+```
+
+```
+inject: ['selectTopic']
+```
+
+### 106 provide/inject vs  props/custom events
+
+1. provide/inject works on grand parent to child relationship, but props only works on parent to child relationship
+2. props/events should be your default communication mechanism, you should only consider provide if you have pass through components
+
+### 107 component communication summary
+
+1. components are used to build UIs by **combining** them
+   1. you can encapsulate logic in a component and split your code into multiple smaller pieces
+2. components build 'parent-child' relations and use 'one-way' data flow for communication
+3. props
+   1. props allows us to pass data from parent to child
+   2. props should be defined **in advance**, possibly in greater detail (type, required...)
+4. custom events
+   1. custom events are emitted ($emit) to trigger a method in a parent component
+   2. can also carry data
+5. to let siblings to communicate, you need to store data in common parent component
+6. provide/inject
+   1. If data need to be passed **across multiple components** (pass-through), use provide/inject
 

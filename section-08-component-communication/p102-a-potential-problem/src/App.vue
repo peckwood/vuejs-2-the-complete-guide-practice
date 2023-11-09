@@ -12,7 +12,7 @@
 export default {
   data() {
     return {
-      topics: [
+      topics2: [
         {
           id: 'basics',
           title: 'The Basics',
@@ -34,17 +34,18 @@ export default {
   },
   provide() {
     return {
-      topics: this.topics
-    }
+      topics: this.topics2,
+      selectTopic: this.activateTopic
+    };
   },
   methods: {
     activateTopic(topicId) {
-      this.activeTopic = this.topics.find((topic) => topic.id === topicId);
+      this.activeTopic = this.topics2.find((topic) => topic.id === topicId);
     },
   },
   mounted() {
     setTimeout(() => {
-      this.topics.push({
+      this.topics2.push({
         id: 'events',
         title: 'Events',
         description: 'Events are important in Vue',
