@@ -136,4 +136,8 @@ If you do **not** want a component to automatically inherit attributes, you can 
 
    is wrong, replace `submit` with some other custom event name
 
-3. 
+### 103 provide and inject
+
+You can use provide and inject. a pattern you can use to provide data in one place and inject it, which means use it, in another place.
+
+You can only inject what has been provided in an **accestor** component of current component
