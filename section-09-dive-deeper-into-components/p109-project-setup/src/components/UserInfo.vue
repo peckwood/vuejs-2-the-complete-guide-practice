@@ -9,12 +9,8 @@
 </template>
 
 <script>
-import BaseBadge from "@/components/BaseBadge.vue";
 export default {
   props: ['fullName', 'infoText', 'role'],
-  components: {
-    BaseBadge
-  },
 };
 </script>
 

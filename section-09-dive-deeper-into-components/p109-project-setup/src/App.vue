@@ -17,6 +17,7 @@ import UserInfo from "@/components/UserInfo.vue";
 
 export default {
   components: {
+    // TheHeader is shown white because it doesn't have `export default`
     TheHeader,
     BadgeList,
     UserInfo

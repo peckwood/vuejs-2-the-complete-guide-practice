@@ -13,11 +13,7 @@
 </template>
 
 <script>
-import BaseBadge from "@/components/BaseBadge.vue";
 export default {
-  components: {
-    BaseBadge
-  },
   data() {
     return {
       activeUser: {

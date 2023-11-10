@@ -13,9 +13,9 @@
 In main.js
 
 ```
-import TheHeader from './components/TheHeader.vue';
+import BaseBadge from "@/components/BaseBadge.vue";
 
-app.component('the-header', TheHeader);
+app.component('BaseBadge', BaseBadge);
 ```
 
 #### local component
@@ -44,4 +44,5 @@ If your use TheHeader (PascalCase), you can use it as self-closing tag
 <TheHeader />
 ```
 
-but self-closing tag is not supported 
+but self-closing tag is not supported
+
