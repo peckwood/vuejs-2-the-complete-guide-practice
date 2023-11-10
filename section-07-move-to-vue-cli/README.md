@@ -104,6 +104,8 @@ export default {
 
 approach 2: inside js:
 
+note: this approach registers componets as **global components**, browser needs to download the code for all global components initially
+
 ```
 import { createApp } from 'vue';
 // 注意这里不要大括号, 大括号是为了named export
