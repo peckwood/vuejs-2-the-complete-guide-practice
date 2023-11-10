@@ -12,6 +12,24 @@
   </section>
 </template>
 
+<script>
+import BaseBadge from "@/components/BaseBadge.vue";
+export default {
+  components: {
+    BaseBadge
+  },
+  data() {
+    return {
+      activeUser: {
+        name: 'Maximilian Schwarzmüller',
+        description: 'Site owner and admin',
+        role: 'admin',
+      },
+    };
+  },
+};
+</script>
+
 <style>
 section h2 {
   margin: 0.5rem 0;
