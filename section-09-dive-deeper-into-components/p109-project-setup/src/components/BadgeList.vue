@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <BaseCard>
     <h2>Available Badges</h2>
     <ul>
       <li>
@@ -9,24 +9,21 @@
         <base-badge type="author" caption="AUTHOR"></base-badge>
       </li>
     </ul>
-  </section>
+  </BaseCard>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      activeUser: {
-        name: 'Maximilian Schwarzmüller',
-        description: 'Site owner and admin',
-        role: 'admin',
-      },
     };
   },
 };
 </script>
 
-<style>
+<style scoped>
+
+
 section h2 {
   margin: 0.5rem 0;
   color: #3a3a3a;
