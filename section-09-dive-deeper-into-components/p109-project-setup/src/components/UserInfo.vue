@@ -1,11 +1,13 @@
 <template>
-  <BaseCard>
-    <div id="userinfo">
-      <h3>{{ fullName }}</h3>
-      <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
-    </div>
+<BaseCard>
+  <template v-slot:header>
+    <h3>{{ fullName }}</h3>
+    <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
+  </template>
+  <template v-slot:default>
     <p>{{ infoText }}</p>
-  </BaseCard>
+  </template>
+</BaseCard>
 </template>
 
 <script>
@@ -15,10 +17,12 @@ export default {
 </script>
 
 <style scoped>
-
-div#userinfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+div {
+  background-color: pink;
 }
+
+h3 {
+  background-color: green;
+}
+
 </style>
