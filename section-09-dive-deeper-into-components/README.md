@@ -71,3 +71,37 @@ slots allows components to receive HTML content from outside, just like props. s
 Note that styles from parent component that uses a child component for slot will affect child's style, but child's will not affect parent. (only if parent and child share the same selector)
 
 Both parent and child's element will have attribute as parent's scoped style
+
+### 115 More on slots
+
+#### default slot content
+
+```
+      <slot name="header">
+        Default Header
+      </slot>
+```
+
+default slot content will be used when no content is passed to slot.
+
+#### this.$slots
+
+this.$slots is a built-in property by vue, it holds information about the slots data this components receives for its different slots.
+
+You can check if we do receive slot data with `this.$slots.mySlotName`.
+
+If didn't receive `this.$slots.mySlotName` will be undefined, and we can hide it in such case:
+
+```
+<slot name="header" v-if="$slots.header">
+</slot>
+```
+
+#### v-slot shorthand
+
+v-slot can be replaced by a shorthand: #.
+
+```
+<template #header>
+```
+
