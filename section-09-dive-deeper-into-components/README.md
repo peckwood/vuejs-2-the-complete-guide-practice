@@ -68,9 +68,45 @@ header[data-v-9a9f6144] {
 
 slots allows components to receive HTML content from outside, just like props. slot allows you to use your own component as a wrapper around dynamic content. 
 
-Note that styles from parent component that uses a child component for slot will affect child's style, but child's will not affect parent. (only if parent and child share the same selector)
+### 113 named slots
 
-Both parent and child's element will have attribute as parent's scoped style
+In order to differentiate them. you need to name slots when you have more than 1 slot. The unnamed slot is the default slot.
+
+define named slot:
+
+```
+<template>
+  <div>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <slot></slot>
+  </div>
+</template>
+```
+
+use named slot:
+
+```
+<BaseCard>
+  <template v-slot:header>
+    <h3>{{ fullName }}</h3>
+    <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
+  </template>
+  <p>{{ infoText }}</p>
+</BaseCard>
+```
+
+### 114 slot styles and compilation
+
+#### scoped styles applies to child component's <u>root node</u>
+
+With `scoped`, the parent component's styles will not leak into child components. However, a child component's <u>root node</u> will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the parent can style the child root element for layout purposes.
+
+#### Scoped styles applies to slotted content
+
+- Scoped styles don't apply to child component templates
+- But they can affect global styles and slotted content from the parent
 
 ### 115 More on slots
 
@@ -104,4 +140,3 @@ v-slot can be replaced by a shorthand: #.
 ```
 <template #header>
 ```
-
