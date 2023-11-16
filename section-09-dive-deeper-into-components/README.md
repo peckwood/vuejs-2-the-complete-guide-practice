@@ -200,4 +200,34 @@ Despite what the video said, `another-prop` is automatically converted to camelC
 
 ### 114 keep dynamic component alive
 
-when we switch our components, the old component is destroyed and removed from DOM
+when we switch our components, the old component is destroyed and removed from DOM. If there are input contents inside component, it is lost.
+
+To keep component alive:
+
+```
+    <keep-alive>
+      <component :is="activeComponent"></component>
+    </keep-alive>
+```
+
+### 119 Applying What We Know & A Problem
+
+You can get an input's value via ref:
+
+```
+<input type="text" ref="goal"/>
+```
+
+```
+const enteredValue = this.$refs.goal.value;
+```
+
+The concept of slots is so powerful.
+
+We can add the content for a totally different component (error-alert) in the component (ManageGoals) where we have all the logic for showing the error alert component.
+
+So we don't need to pass data around with custom events, which the error alert emits here.
+
+Instead, we can handle everything here in the component where the error is generated and yet hand off the styling and the markup of that dialogue to a totally different component.
+
+Which is a really nice way of splitting responsibility it's a nice pattern to see

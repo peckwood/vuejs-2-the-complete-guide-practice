@@ -1,11 +1,36 @@
 <template>
   <h2>Manage Goals</h2>
-  <input type="text" />
+  <input type="text" ref="goal"/>
+  <button @click="setGoal">Set Goal</button>
+  <error-alert v-if="inputIsInvalid">
+    <h2>Input is invalid!</h2>
+    <p>Please enter at least a few characters...</p>
+    <button @click="closeErrorAlert">Okay</button>
+  </error-alert>
 </template>
 <script>
 
+import ErrorAlert from "@/components/ErrorAlert.vue";
+
 export default {
-  name: "ManageGoals"
+  components: {ErrorAlert},
+  data() {
+    return {
+      inputIsInvalid: false
+    }
+  },
+  methods: {
+    setGoal(){
+      const enteredValue = this.$refs.goal.value;
+      if(!enteredValue){
+        this.inputIsInvalid = true;
+        // alert('Input must not be empty!')
+      }
+    },
+    closeErrorAlert(){
+      this.inputIsInvalid = false;
+    }
+  }
 };
 </script>
 
