@@ -3,7 +3,9 @@
     <TheHeader></TheHeader>
     <button @click="setActiveComponent('active-goals')">Active Goals</button>
     <button @click="setActiveComponent('manage-goals')">Manage Goals</button>
-    <component :is="activeComponent"></component>
+    <keep-alive>
+      <component :is="activeComponent"></component>
+    </keep-alive>
   </div>
 </template>
 

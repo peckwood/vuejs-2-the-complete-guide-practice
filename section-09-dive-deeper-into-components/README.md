@@ -198,3 +198,6 @@ Despite what the video said, `another-prop` is automatically converted to camelC
 <component :is="activeComponent"></component>
 ```
 
+### 114 keep dynamic component alive
+
+when we switch our components, the old component is destroyed and removed from DOM
