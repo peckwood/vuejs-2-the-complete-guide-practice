@@ -191,3 +191,10 @@ can be simplified to
 #### automatically camelCase conversion
 
 Despite what the video said, `another-prop` is automatically converted to camelCase by Vue, so I had to use `{{ slotProps['anotherProp'] }}`
+
+### 113 dynamic component
+
+```
+<component :is="activeComponent"></component>
+```
+
