@@ -140,3 +140,54 @@ v-slot can be replaced by a shorthand: #.
 ```
 <template #header>
 ```
+
+### 116 scoped slots
+
+The concept of scoped slots is about letting you pass data from inside the component where you defined a slot to the component where you pass the markup for the slot.
+
+#### define properties in child (CourseGoals.vue)
+
+```
+<template>
+  <ul>
+    <li v-for="goal in goals" :key="goal">
+      <slot :item="goal" otherContent="..."></slot>
+    </li>
+  </ul>
+</template>
+```
+
+#### user properties in parent (App.vue)
+
+```
+    <course-goals #default="slotProps">
+      <slot>
+        <h2>{{ slotProps.item }}</h2>
+        <p>{{ slotProps.otherContent }}</p>
+      </slot>
+    </course-goals>
+```
+
+#### default slot simplification
+
+```
+    <course-goals>
+      <template #default="slotProps">
+        <h2>{{ slotProps.item }}</h2>
+        <p>{{ slotProps['another-prop'] }}</p>
+      </template>
+    </course-goals>
+```
+
+can be simplified to 
+
+```
+    <course-goals #default="slotProps">
+      <h2>{{ slotProps.item }}</h2>
+      <p>{{ slotProps['anotherProp'] }}</p>
+    </course-goals>
+```
+
+#### automatically camelCase conversion
+
+Despite what the video said, `another-prop` is automatically converted to camelCase by Vue, so I had to use `{{ slotProps['anotherProp'] }}`
