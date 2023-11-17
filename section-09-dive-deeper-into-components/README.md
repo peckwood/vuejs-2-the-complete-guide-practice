@@ -231,3 +231,21 @@ So we don't need to pass data around with custom events, which the error alert e
 Instead, we can handle everything here in the component where the error is generated and yet hand off the styling and the markup of that dialogue to a totally different component.
 
 Which is a really nice way of splitting responsibility it's a nice pattern to see
+
+### 120 teleporting elements
+
+`<Teleport>` is a built-in component that allows us to "teleport" a part of a component's template into a DOM node that exists outside the DOM hierarchy of that component.
+
+```
+  <teleport to="body">
+    <my-element>
+  </teleport>
+```
+
+The `to` target of `<Teleport>` expects a CSS selector string or an actual DOM node. Here, we are essentially telling Vue to "**teleport** this template fragment **to** the **`body`** tag".
+
+### 121 fragments
+
+In Vue 3, components now have official support for multi-root node components, i.e., fragments!
+
+In 2.x, multi-root components were not supported and would emit a warning when a user accidentally created one. As a result, many components are wrapped in a single `<div>` in order to fix this error.
