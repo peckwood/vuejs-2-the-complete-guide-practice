@@ -48,7 +48,7 @@ but self-closing tag is not supported
 
 ### 111 scoped styles
 
-Styles that affect everything in your app are defined in <style> inside App.vue
+Styles that affect everything in your app are defined in <style> (not scoped) inside App.vue
 
 You can add `scope` attribute to your <style> to ensure styles are only applied to current component
 
@@ -249,3 +249,39 @@ The `to` target of `<Teleport>` expects a CSS selector string or an actual DOM n
 In Vue 3, components now have official support for multi-root node components, i.e., fragments!
 
 In 2.x, multi-root components were not supported and would emit a warning when a user accidentally created one. As a result, many components are wrapped in a single `<div>` in order to fix this error.
+
+### 122 style  guide
+
+[Style Guide — Vue.js (vuejs.org)](https://v2.vuejs.org/v2/style-guide/)
+
+Vue 3 style guide is incomplete
+
+### 124 summary
+
+#### Component Registration
+
+component can be registered **globally or locally**: Prefer **local** registration
+
+Styles can also be **global or scoped** to a component. Prefer scoped for most components
+
+#### Slots
+
+**Slots** can be used to add a "**placeholder**" for dynamic HTML code
+
+**Multiple, named** slots are possible
+
+default fallbacks can be provided
+
+**Scoped slots** allow advanced use-cases
+
+#### dynamic components
+
+components can be **swapped dynamically** via the built-in `component` component
+
+component caching can be added via the "keep-alive" component
+
+#### teleport and style guide
+
+**DOM structure can be manipulated** via `teleport` - it **keeps the component hierarchy**
+
+Consider follow the style guide
