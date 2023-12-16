@@ -10,7 +10,9 @@
       :mode='addButtonMode'
     >Add Resource
     </base-button>
-    <component :is='currentTab' @submit='addNewResource'></component>
+    <keep-alive>
+      <component :is='currentTab'></component>
+    </keep-alive>
   </base-card>
 </template>
 <script>
@@ -50,7 +52,8 @@ export default {
   },
   provide() {
     return {
-      storedResources: this.storedResources
+      storedResources: this.storedResources,
+      addNewResource: this.addNewResource
     }
   },
   methods: {
@@ -58,7 +61,8 @@ export default {
       this.currentTab = tab;
     },
     addNewResource(data){
-      this.storedResources.push(data);
+      this.storedResources.unshift(data);
+      this.currentTab = 'stored-resources';
     }
   }
 };

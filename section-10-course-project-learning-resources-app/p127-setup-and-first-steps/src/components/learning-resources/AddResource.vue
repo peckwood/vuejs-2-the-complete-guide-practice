@@ -5,15 +5,15 @@
       <form @submit.prevent='onSubmit'>
         <div class='form-control'>
           <label>Title</label>
-          <input type='text' v-model='newResource.title' id='title' name='title'>
+          <input type='text' ref='titleInput' id='title' name='title'>
         </div>
         <div class='form-control'>
           <label>Description</label>
-          <textarea v-model='newResource.description' id='description' name='description' rows='3'></textarea>
+          <textarea ref='descInput' id='description' name='description' rows='3'></textarea>
         </div>
         <div class='form-control'>
           <label>Link</label>
-          <input v-model='newResource.link' id='link' name='link' >
+          <input ref='linkInput' id='link' name='link' >
         </div>
         <div>
           <base-button type='submit'>Submit</base-button>
@@ -28,6 +28,7 @@ import BaseButton from '@/components/UI/BaseButton.vue';
 
 export default {
   components: { BaseButton, BaseCard },
+  inject: ['addNewResource'],
   emits: ['submit'],
   data() {
     return {
@@ -40,8 +41,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.newResource.id = this.newResource.title;
-      this.$emit('submit', this.newResource);
+      const newResource = {
+        id: new Date().toISOString(),
+        title: this.$refs.titleInput.value,
+        description: this.$refs.descInput.value,
+        link: this.$refs.linkInput.value
+      };
+      this.addNewResource(newResource);
     }
   }
 };
