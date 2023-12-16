@@ -4,7 +4,6 @@
       <slot name="header"
             v-if="$slots.header"
             :title='myTitle'
-
       >
         Default Header
       </slot>

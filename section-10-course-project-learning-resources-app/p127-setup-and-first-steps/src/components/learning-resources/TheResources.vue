@@ -10,7 +10,7 @@
       :mode='addButtonMode'
     >Add Resource
     </base-button>
-    <component :is='currentTab'></component>
+    <component :is='currentTab' @submit='addNewResource'></component>
   </base-card>
 </template>
 <script>
@@ -56,6 +56,9 @@ export default {
   methods: {
     switchTab(tab){
       this.currentTab = tab;
+    },
+    addNewResource(data){
+      this.storedResources.push(data);
     }
   }
 };

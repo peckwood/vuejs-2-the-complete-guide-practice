@@ -170,6 +170,8 @@ The concept of scoped slots is about letting you pass data from inside the compo
 
 #### default slot simplification
 
+Condition: When there is **ONLY** default slot, which means there are no named slots
+
 ```
     <course-goals>
       <template #default="slotProps">
