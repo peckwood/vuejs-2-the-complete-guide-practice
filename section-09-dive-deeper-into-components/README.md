@@ -1,6 +1,8 @@
-### 108 module introduction
+# Section 9: Diving Deeper Into Components
 
-#### component registration and styling
+### - 108 module introduction
+
+#### - component registration and styling
 
 #### slots and dynamic components
 
@@ -161,10 +163,8 @@ The concept of scoped slots is about letting you pass data from inside the compo
 
 ```
     <course-goals #default="slotProps">
-      <slot>
         <h2>{{ slotProps.item }}</h2>
         <p>{{ slotProps.otherContent }}</p>
-      </slot>
     </course-goals>
 ```
 
@@ -192,13 +192,13 @@ can be simplified to
 
 Despite what the video said, `another-prop` is automatically converted to camelCase by Vue, so I had to use `{{ slotProps['anotherProp'] }}`
 
-### 113 dynamic component
+### 117 dynamic component
 
 ```
 <component :is="activeComponent"></component>
 ```
 
-### 114 keep dynamic component alive
+### 118 keep dynamic component alive
 
 when we switch our components, the old component is destroyed and removed from DOM. If there are input contents inside component, it is lost.
 
@@ -278,7 +278,46 @@ default fallbacks can be provided
 
 components can be **swapped dynamically** via the built-in `component` component
 
+```
+<component :is='activeComponent' ></component>
+```
+
+`activeComponent` is the name of the component
+
 component caching can be added via the "keep-alive" component
+
+#### pass props to dynamic components
+
+1. you can pass prop directly
+
+   ```
+   <component :is='currentTab' :component1Prop1='component1Prop1'></component>
+   ```
+
+   but the flaw is you need to add v-bind for all props of ALL potential components
+
+2. you can use v-bind without argument to pass an object that contain all props used by all potential components
+
+   ```
+   <component :is='currentTab' :='myPropObj'></component>
+   ```
+
+   ```
+     computed: {
+       dynamicComponentProp() {
+         return {
+           myPropObj: {
+           	component1Prop1: this.component1Prop1,
+           	component2Prop1: this.component2Prop1
+           }
+         }
+       },
+     }
+   ```
+
+3. use provide/inject feature in its ancestor
+
+4. 
 
 #### teleport and style guide
 

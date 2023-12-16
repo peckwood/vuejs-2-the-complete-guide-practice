@@ -1,3 +1,5 @@
+# Section 8: Component Communication
+
 ### 93 props behavior & changing props
 
 Props typically should not be mutated
@@ -39,7 +41,7 @@ props: {
 	},
     prop3: {
 		type: String,
-		requried: false,
+        required: false,
 		default: '1',
 		validator: function(value) {
 			//should return true or false

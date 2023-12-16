@@ -1,7 +1,15 @@
 <template>
   <base-card>
-    <base-button @click='switchToStored'>Stored Resources</base-button>
-    <base-button @click='switchToAddResource'>Add Resource</base-button>
+    <base-button
+      @click="switchTab('stored-resources')"
+      :mode='storedButtonMode'
+    >Stored Resources
+    </base-button>
+    <base-button
+      @click="switchTab('add-resource')"
+      :mode='addButtonMode'
+    >Add Resource
+    </base-button>
     <component :is='currentTab'></component>
   </base-card>
 </template>
@@ -15,15 +23,39 @@ export default {
   components: { StoredResources, AddResource, LearningResource },
   data(){
     return {
-      currentTab: 'stored-resources'
+      currentTab: 'stored-resources',
+      storedResources: [
+        {
+          id: 'official-guide',
+          title: 'Official Guide',
+          description: 'The official Vue.js documentation.',
+          link: 'https://vuejs.org',
+        },
+        {
+          id: 'google',
+          title: 'Google',
+          description: 'Learn to google...',
+          link: 'https://google.org',
+        },
+      ],
+    }
+  },
+  computed: {
+    storedButtonMode(){
+      return this.currentTab === 'stored-resources' ? null : 'flat';
+    },
+    addButtonMode(){
+      return this.currentTab === 'add-resource' ? null : 'flat';
+    }
+  },
+  provide() {
+    return {
+      storedResources: this.storedResources
     }
   },
   methods: {
-    switchToAddResource(){
-      this.currentTab = 'add-resource';
-    },
-    switchToStored(){
-      this.currentTab = 'stored-resources';
+    switchTab(tab){
+      this.currentTab = tab;
     }
   }
 };

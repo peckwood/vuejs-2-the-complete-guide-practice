@@ -11,11 +11,6 @@ export default {
   components: {
     TheResources,
     theHeader
-  },
-  data() {
-    return {
-
-    }
   }
 };
 </script>

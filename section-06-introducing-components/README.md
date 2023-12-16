@@ -1,3 +1,5 @@
+# Section 06 Introducing components
+
 ### 70 The problem
 
 The problem is, when you use v-for for multiple list items and you create an event listener for each item, they are all bound to the same variable. You are unable to make individual changes.
