@@ -1,4 +1,17 @@
 <template>
+  <base-dialog
+    ref='baseDialog'
+    title='Invalid Input'
+    v-if='inputIsInvalid'
+    @close='confirmError'>
+    <template #default>
+      <p>Invalid input is detected</p>
+      <p>Please check your input</p>
+    </template>
+    <template #actions>
+      <base-button @click='confirmError'>Okay</base-button>
+    </template>
+  </base-dialog>
   <base-card
   >
     <template #default>
@@ -25,9 +38,10 @@
 <script>
 import BaseCard from '@/components/UI/BaseCard.vue';
 import BaseButton from '@/components/UI/BaseButton.vue';
+import BaseDialog from '@/components/UI/BaseDialog.vue';
 
 export default {
-  components: { BaseButton, BaseCard },
+  components: { BaseDialog, BaseButton, BaseCard },
   inject: ['addNewResource'],
   emits: ['submit'],
   data() {
@@ -36,18 +50,31 @@ export default {
         title: '',
         description: '',
         link: ''
-      }
+      },
+      inputIsInvalid: false,
     }
   },
   methods: {
     onSubmit() {
+      const title = this.$refs.titleInput.value;
+      const description = this.$refs.descInput.value;
+      const link = this.$refs.linkInput.value;
+      if(title.trim() === ''
+      || description.trim() === ''
+      || link.trim() === ''){
+        this.inputIsInvalid = true;
+        return;
+      }
       const newResource = {
         id: new Date().toISOString(),
-        title: this.$refs.titleInput.value,
+        title: title,
         description: this.$refs.descInput.value,
         link: this.$refs.linkInput.value
       };
       this.addNewResource(newResource);
+    },
+    confirmError(){
+      this.inputIsInvalid = false;
     }
   }
 };

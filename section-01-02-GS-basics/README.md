@@ -106,6 +106,18 @@ Watchers scenarios:
 - send http requests if certain values change
 - timers if certain values change
 
+```
+  watch: {
+    // whenever question changes, this function will run
+    question(newQuestion, oldQuestion) {
+      if (newQuestion.includes('?')) {
+        this.getAnswer()
+      }
+    
+```
+
+
+
 ### 31 methods vs computed vs watch
 
 #### methods
