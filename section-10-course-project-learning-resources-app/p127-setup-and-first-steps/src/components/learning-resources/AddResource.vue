@@ -1,4 +1,5 @@
 <template>
+
   <base-dialog
     ref='baseDialog'
     title='Invalid Input'
