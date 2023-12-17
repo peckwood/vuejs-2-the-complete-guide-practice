@@ -113,7 +113,8 @@ Watchers scenarios:
       if (newQuestion.includes('?')) {
         this.getAnswer()
       }
-    
+    }
+  },
 ```
 
 

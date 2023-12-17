@@ -1,18 +1,21 @@
 <template>
-  <div @click='$emit("close")'></div>
-  <dialog id='dialog' ref='dialog' open>
-    <header>
-      <slot name='header'>
-        <h2> {{ title }}</h2>
-      </slot>
-    </header>
-    <section>
-      <slot></slot>
-    </section>
-    <menu>
-      <slot name='actions'></slot>
-    </menu>
-  </dialog>
+  <teleport to='body'>
+<!--    background div-->
+    <div @click='$emit("close")'></div>
+    <dialog id='dialog' ref='dialog' open>
+      <header>
+        <slot name='header'>
+          <h2> {{ title }}</h2>
+        </slot>
+      </header>
+      <section>
+        <slot></slot>
+      </section>
+      <menu>
+        <slot name='actions'></slot>
+      </menu>
+    </dialog>
+  </teleport>
 </template>
 
 <script>

@@ -174,6 +174,8 @@ provide() {
 
 **Note:** If the data in provide is changed, child's injected data is also changed
 
+Note: You should work on the reference value **directly**, when passing reference value using provide/inject. More in detail at `section-10-course-project-learning-resources-app\README.md\137 Deleting Items`
+
 ### 105 provide and inject for methods
 
 You might have to emit all the way from child to ancestor, but you can use project and inject to pass a method from ancestor to child

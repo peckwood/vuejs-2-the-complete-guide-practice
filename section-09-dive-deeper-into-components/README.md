@@ -246,6 +246,8 @@ Which is a really nice way of splitting responsibility it's a nice pattern to se
 
 The `to` target of `<Teleport>` expects a CSS selector string or an actual DOM node. Here, we are essentially telling Vue to "**teleport** this template fragment **to** the **`body`** tag".
 
+If you want to teleport a dialog to a child of body, you teleport directly **inside the dialog component**, not where it is used. so that it is directly inside body wherever it is used.
+
 ### 121 fragments
 
 In Vue 3, components now have official support for multi-root node components, i.e., fragments!
