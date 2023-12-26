@@ -75,3 +75,37 @@ div.form-control.invalid label {
 }
 ```
 
+### 147 Using v-model on Custom Components
+
+Under the hood, the template compiler expands `v-model` to the more verbose equivalent for us. So the above code does the same as the following:
+
+```
+<input
+  :value="searchText"
+  @input="searchText = $event.target.value"
+/>
+```
+
+When used on a component, `v-model` instead expands to this:
+
+```
+<CustomInput
+  :model-value="searchText"
+  @update:model-value="newValue => searchText = newValue"
+/>
+```
+
+so you need to implement `update` event and `modelValue` prop in order to use v-model on a template
+
+```
+export default {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  methods: {
+    activate(option) {
+      this.$emit('update:modelValue', option);
+    }
+  }
+};
+```
+
