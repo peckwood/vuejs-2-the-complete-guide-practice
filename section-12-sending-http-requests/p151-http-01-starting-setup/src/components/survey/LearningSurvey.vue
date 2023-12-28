@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -60,7 +61,7 @@ export default {
         rating: this.chosenRating,
       });*/
 
-      fetch('http://localhost:8081/springbootapp/save-survey', {
+/*      fetch('http://localhost:8081/springbootapp/save-survey', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -69,6 +70,11 @@ export default {
           name: this.enteredName,
           rating: this.chosenRating
         })
+      });*/
+
+      axios.post('http://localhost:8081/springbootapp/save-survey', {
+        name: this.enteredName,
+        rating: this.chosenRating,
       });
 
       this.enteredName = '';
