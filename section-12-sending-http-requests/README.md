@@ -85,3 +85,97 @@ Controller:
       });
 ```
 
+### 156 Using Axios Instead Of "fetch()"
+
+Run `npm install --save axios` to install axios
+
+Import
+
+```
+<script>
+import axios from 'axios';
+export default {
+...
+```
+
+Send Data with Axios
+
+```
+      axios.post('http://localhost:8081/springbootapp/save-survey', {
+        name: this.enteredName,
+        rating: this.chosenRating,
+      });
+```
+
+As you can see, with Axios, you have to **write less code**. It automatically sets the `Content-Type` header for you, it also automatically converts the body data to JSON.
+
+### 157  Getting Data (GET Request) & Transforming Response Data
+
+#### chain then()
+
+```
+fetch(url).then(response => {
+if (response.ok) {
+	return response.json();
+}
+}).then(data => {
+	this.results = data;
+});
+```
+
+is better than
+
+```
+fetch(url).then(response => {
+        if (response.ok) {
+          response.json().then(data => {
+            this.results = data;
+          })
+        }
+      });
+```
+
+#### get data with fetch() and axios
+
+```
+    loadData() {
+      const url = 'http://localhost:8081/springbootapp/get-all-survey';
+
+      fetch(url).then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+      }).then(data => {
+        this.results = data;
+      });
+
+      axios.get(url).then(res => {
+        this.results = res.data;
+      });
+    }
+
+```
+
+### Difference between regular function syntax and  arrow function syntax
+
+if you write
+
+```
+      fetch(url).then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+      }).then(function(data){
+        this.results = data;
+      });
+```
+
+you get error
+
+```
+Uncaught (in promise)
+TypeError: Cannot set property 'results' of undefined at eval...
+```
+
+The `this` inside function() does not refer to my vue instance object. `this` keyword inside of arrow function refer to the same context as it does outside of them.
+

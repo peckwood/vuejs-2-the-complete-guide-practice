@@ -3,7 +3,7 @@
     <base-card>
       <h2>Submitted Experiences</h2>
       <div>
-        <base-button>Load Submitted Experiences</base-button>
+        <base-button @click='loadData'>Load Submitted Experiences</base-button>
       </div>
       <ul>
         <survey-result
@@ -18,13 +18,35 @@
 </template>
 
 <script>
+import axios from 'axios';
 import SurveyResult from './SurveyResult.vue';
 
 export default {
-  props: ['results'],
   components: {
     SurveyResult,
   },
+  data() {
+    return {
+      results: []
+    }
+  },
+  methods: {
+    loadData() {
+      const url = 'http://localhost:8081/springbootapp/get-all-survey';
+
+      fetch(url).then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+      }).then(data => {
+        this.results = data;
+      });
+
+/*      axios.get(url).then(res => {
+        this.results = res.data;
+      });*/
+    }
+  }
 };
 </script>
 
