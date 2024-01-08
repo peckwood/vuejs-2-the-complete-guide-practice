@@ -5,7 +5,8 @@
       <div>
         <base-button @click='loadData'>Load Submitted Experiences</base-button>
       </div>
-      <ul>
+      <p v-if='isLoading'>Loading...</p>
+      <ul v-else>
         <survey-result
           v-for="result in results"
           :key="result.id"
@@ -27,7 +28,8 @@ export default {
   },
   data() {
     return {
-      results: []
+      results: [],
+      isLoading: false
     }
   },
   mounted() {
@@ -37,11 +39,13 @@ export default {
     loadData() {
       const url = 'http://localhost:8081/springbootapp/get-all-survey';
 
+      this.isLoading = true;
       fetch(url).then(response => {
         if (response.ok) {
           return response.json();
         }
       }).then(data => {
+        this.isLoading = false;
         this.results = data;
       });
 
