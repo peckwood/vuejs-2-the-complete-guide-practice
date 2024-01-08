@@ -14,7 +14,8 @@
           :rating="result.rating"
         ></survey-result>
       </ul>
-      <p v-else>You dont have any submitted experiences</p>
+      <p v-else-if='!isLoading && error'>{{ error }}</p>
+      <p v-else-if='!isLoading && (!results || results.length === 0)'>You dont have any submitted experiences</p>
     </base-card>
   </section>
 </template>
@@ -30,7 +31,8 @@ export default {
   data() {
     return {
       results: [],
-      isLoading: false
+      isLoading: false,
+      error: null
     }
   },
   mounted() {
@@ -38,17 +40,27 @@ export default {
   },
   methods: {
     loadData() {
+      this.error = null;
+      // change the port to something new, like 8082, to trigger catch, just change url at the end wont trigger catch
+      // http://localhost:8082/springbootapp/get-all-survey-404 wont trigger catch
       const url = 'http://localhost:8081/springbootapp/get-all-survey';
 
       this.isLoading = true;
-      fetch(url).then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-      }).then(data => {
-        this.isLoading = false;
-        this.results = data;
-      });
+      fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then(data => {
+          this.isLoading = false;
+          this.results = data;
+        })
+        .catch(err => {
+          this.isLoading = false;
+          console.log(err);
+          this.error = 'Failed to fetch data, please try again later';
+        });
 
 /*      axios.get(url).then(res => {
         this.results = res.data;
