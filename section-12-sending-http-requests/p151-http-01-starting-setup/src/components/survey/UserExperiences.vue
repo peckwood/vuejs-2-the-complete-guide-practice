@@ -30,6 +30,9 @@ export default {
       results: []
     }
   },
+  mounted() {
+    this.loadData();
+  },
   methods: {
     loadData() {
       const url = 'http://localhost:8081/springbootapp/get-all-survey';
