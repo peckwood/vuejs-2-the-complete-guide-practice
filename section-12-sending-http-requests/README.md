@@ -181,7 +181,7 @@ The `this` inside function() does not refer to my vue instance object. `this` ke
 
 ### 163 Handling Error Responses
 
-### fetch
+#### fetch
 
 why does adding return before response.json() made outer catch able to catch the error thrown by inner catch?
 ChatGPT
@@ -228,7 +228,9 @@ By using return, you're effectively saying, "Wait for this promise to resolve or
           })
 ```
 
-axios
+#### axios
+
+With axios, the catch will also trigger on error responses.
 
 ```
         axios.post(url, {
@@ -255,3 +257,11 @@ axios
 
 
 
+### 164 module summary
+
+You learnt
+
+- how to send http requests to send and get data
+- how to work with reponse data, how to extract, how to show it
+- how to show loading message
+- how to handle errors
