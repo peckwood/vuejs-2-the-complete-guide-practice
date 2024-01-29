@@ -114,3 +114,12 @@ If you load a component through routing, you dont need to register it as a globa
 4. http://localhost:8080/users展示users组件
 
 But our navigation is not working anymore, we are going to navigate with route next.
+
+### 170 Navigating with router-link
+
+use `<router-link>` to 
+
+- it is a anchor tag under the hood,
+- preserve the state
+
+we need to change the styles for the button to `<a>` since its an anchor under the hood
