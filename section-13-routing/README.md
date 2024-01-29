@@ -123,3 +123,35 @@ use `<router-link>` to
 - preserve the state
 
 we need to change the styles for the button to `<a>` since its an anchor under the hood
+
+### 171 Styling Active Links
+
+the active router-link will have a `router-link-active` class on it. You can style this class to style the active link.
+
+```
+a.router-link-active
+{
+  color: #f1a80a;
+  border-color: #f1a80a;
+  background-color: #1a037e;
+}
+```
+
+`router-link-exact-active` will only apply to the navigation item that's **fully matched by the current path**
+
+`router-link-active` will apply to any navigation item which contain a part of the currently active route.
+
+you can override the default classes here:
+
+```
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {path: '/teams', component: TeamsList}, // our-domain.com/teams => TeamsList
+    {path: '/users', component: UsersList} // our-domain.com/users => UsersList
+  ],
+  linkActiveClass: 'customActive',
+  linkExactActiveClass: 'customExactActive'
+});
+```
+
