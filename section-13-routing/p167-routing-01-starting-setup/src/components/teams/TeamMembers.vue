@@ -3,7 +3,7 @@
     <h2>{{ teamName }}</h2>
     <ul>
       <user-item
-        v-for="member in members"
+        v-for="member in selectedMembers"
         :key="member.id"
         :name="member.fullName"
         :role="member.role"
@@ -19,13 +19,23 @@ export default {
   components: {
     UserItem
   },
+  inject: ['teams', 'users'],
+  created() {
+    console.log('this.$route', this.$route); // /teams/t1
+    console.log('this.$route.path', this.$route.path); // /teams/t1
+    const teamId = this.$route.params.teamId;
+    const selectedTeam = this.teams.find(team => team.id === teamId);
+    this.teamName = selectedTeam.name;
+    const members = selectedTeam.members;
+    members.forEach(memberId => {
+      this.users.filter(u => u.id === memberId).forEach(m => this.selectedMembers.push(m));
+    })
+    console.log('selectedMembers', this.selectedMembers)
+  },
   data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ],
+      teamName: '',
+      selectedMembers: [],
     };
   },
 };

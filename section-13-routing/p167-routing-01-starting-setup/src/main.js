@@ -4,11 +4,16 @@ import {createRouter, createWebHistory} from 'vue-router';
 import App from './App.vue';
 import TeamsList from '@/components/teams/TeamsList.vue';
 import UsersList from '@/components/users/UsersList.vue';
+import teamMembers from '@/components/teams/TeamMembers.vue';
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {path: '/teams', component: TeamsList}, // our-domain.com/teams => TeamsList
-    {path: '/users', component: UsersList} // our-domain.com/users => UsersList
+    {path: '/users', component: UsersList}, // our-domain.com/users => UsersList
+    // new must be above :teamId, or it will be recognized as an id
+    // {path: '/teams/new', component: TeamsList}, // our-domain.com/teams => TeamsList
+    {path: '/teams/:teamId', component: teamMembers}, // our-domain.com/teams => TeamsList
   ]
 });
 
