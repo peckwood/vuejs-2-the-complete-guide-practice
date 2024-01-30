@@ -155,3 +155,25 @@ const router = createRouter({
 });
 ```
 
+### 172 programmatic navigation
+
+```
+this.$router.push('/teams')
+```
+
+### 173 Passing Data with Route Params (Dynamic Segments )
+
+At main.js:
+
+```
+{path: '/teams/:teamId', component: teamMembers}
+```
+
+teamId is the name of your parameter, it can be anything.
+
+At TeamMmembers component: 
+
+```
+const teamId = this.$route.params.teamId;
+```
+
