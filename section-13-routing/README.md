@@ -189,3 +189,17 @@ const teamId = this.$route.params.teamId;
   ]
 ```
 
+### 174 navigation and dynamic paths
+
+```
+<router-link :to="teamMembersLink">View Members</router-link>
+```
+
+```
+  computed:{
+    teamMembersLink() {
+      return 'teams/' + this.teamId;
+    }
+  }
+```
+
