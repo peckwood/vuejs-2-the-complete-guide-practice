@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to='/teams/t2'>Go to team t2 (nothing happens)</router-link>
   </section>
 </template>
 
@@ -20,17 +21,29 @@ export default {
     UserItem
   },
   inject: ['teams', 'users'],
+  watch: {
+    '$route'(newRoute){
+      this.loadTeamMembers(newRoute);
+    }
+  },
   created() {
-    console.log('this.$route', this.$route); // /teams/t1
-    console.log('this.$route.path', this.$route.path); // /teams/t1
-    const teamId = this.$route.params.teamId;
-    const selectedTeam = this.teams.find(team => team.id === teamId);
-    this.teamName = selectedTeam.name;
-    const members = selectedTeam.members;
-    members.forEach(memberId => {
-      this.users.filter(u => u.id === memberId).forEach(m => this.selectedMembers.push(m));
-    })
-    console.log('selectedMembers', this.selectedMembers)
+    this.loadTeamMembers(this.$route);
+  },
+  methods: {
+    loadTeamMembers(route){
+      console.log('this.$route', route); // /teams/t1
+      console.log('this.$route.path', route.path); // /teams/t1
+      console.log('newRoute', route); // /teams/t1
+      const teamId = route.params.teamId;
+      const selectedTeam = this.teams.find(team => team.id === teamId);
+      this.teamName = selectedTeam.name;
+      const members = selectedTeam.members;
+      this.selectedMembers = [];
+      members.forEach(memberId => {
+        this.users.filter(u => u.id === memberId).forEach(m => this.selectedMembers.push(m));
+      })
+      console.log('selectedMembers', this.selectedMembers)
+    }
   },
   data() {
     return {

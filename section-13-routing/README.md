@@ -203,3 +203,23 @@ const teamId = this.$route.params.teamId;
   }
 ```
 
+### 176 Updating Params Data with Watchers
+
+#### behavior
+
+When you click on `Go to team t2`, nothing happens
+
+#### reason
+
+when you are on a component, and you click on a <router-link> that points to the same component. nothing happens because vue router cache components instead of destroy and rebuild them. caching is more efficient
+
+however, we need to see a different page when the parameters change. we can solve this with a watcher. because when the parameter change, `this.$route` change since it holds the latest parameter, and you can add a watcher on it to trigger an reload of data
+
+```
+  watch: {
+    '$route'(newRoute){
+      this.loadTeamMembers(newRoute);
+    }
+  },
+```
+
