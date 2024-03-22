@@ -21,20 +21,20 @@ export default {
     UserItem
   },
   inject: ['teams', 'users'],
+  props: ['teamId'],
   watch: {
-    '$route'(newRoute){
-      this.loadTeamMembers(newRoute);
+    'teamId'(teamId){
+      console.log('prop teamId changed to', this.teamId)
+      this.loadTeamMembers(teamId);
     }
   },
   created() {
-    this.loadTeamMembers(this.$route);
+    console.log('created with teamId', this.teamId)
+    this.loadTeamMembers(this.teamId);
   },
   methods: {
-    loadTeamMembers(route){
-      console.log('this.$route', route); // /teams/t1
-      console.log('this.$route.path', route.path); // /teams/t1
-      console.log('newRoute', route); // /teams/t1
-      const teamId = route.params.teamId;
+    loadTeamMembers(teamIdProp){
+      const teamId = teamIdProp;
       const selectedTeam = this.teams.find(team => team.id === teamId);
       this.teamName = selectedTeam.name;
       const members = selectedTeam.members;

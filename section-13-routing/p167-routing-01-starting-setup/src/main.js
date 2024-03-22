@@ -13,7 +13,7 @@ const router = createRouter({
     {path: '/users', component: UsersList}, // our-domain.com/users => UsersList
     // new must be above :teamId, or it will be recognized as an id
     // {path: '/teams/new', component: TeamsList}, // our-domain.com/teams => TeamsList
-    {path: '/teams/:teamId', component: teamMembers}, // our-domain.com/teams => TeamsList
+    {path: '/teams/:teamId', component: teamMembers, props: true}, // our-domain.com/teams => TeamsList
   ]
 });
 

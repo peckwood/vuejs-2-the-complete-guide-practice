@@ -213,6 +213,8 @@ When you click on `Go to team t2`, nothing happens
 
 when you are on a component, and you click on a <router-link> that points to the same component. nothing happens because vue router cache components instead of destroy and rebuild them. caching is more efficient
 
+#### solution
+
 however, we need to see a different page when the parameters change. we can solve this with a watcher. because when the parameter change, `this.$route` change since it holds the latest parameter, and you can add a watcher on it to trigger an reload of data
 
 ```
@@ -223,3 +225,17 @@ however, we need to see a different page when the parameters change. we can solv
   },
 ```
 
+### 177 Passing Params as Props
+
+set props to true will allow the dynamic param also sent as prop
+
+```
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {path: '/teams/:teamId', component: teamMembers, props: true}, // our-domain.com/teams => TeamsList
+  ]
+});
+```
+
+Component TeamMembers will able to receive prop `teamId`
