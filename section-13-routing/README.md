@@ -239,3 +239,37 @@ const router = createRouter({
 ```
 
 Component TeamMembers will able to receive prop `teamId`
+
+### 178 Redirecting & "Catch All" Routes
+
+If you want to access 'teams' when you visit '/', you can:
+
+#### redirect
+
+you can redirect '/' to '/teams'
+
+```
+  routes: [
+    {path: '/', redirect: '/teams'},
+  ]
+```
+
+#### alias
+
+you can also make '/teams' an alias of '/'
+
+```
+ {path: '/teams', component: TeamsList, alias: '/'}
+```
+
+the difference is, redirect will make the url change to 'teams', but alias will keep the url as '/'
+
+#### catch all
+
+```
+{path: '/:notFound(.*)', component: notFound}
+```
+
+1. it's a dynamic segment
+2. `.*` is a regular input, which means any character combination
+3. it should come last, otherwise it would also overwrite other routes
