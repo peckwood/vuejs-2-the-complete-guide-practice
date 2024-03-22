@@ -273,3 +273,72 @@ the difference is, redirect will make the url change to 'teams', but alias will 
 1. it's a dynamic segment
 2. `.*` is a regular input, which means any character combination
 3. it should come last, otherwise it would also overwrite other routes
+
+### 179 nested routes
+
+#### why you need?
+
+You dont want to view your team members on a separate page, you want to view it inside /teams page. you can achieve this with nested routes.
+
+#### how to add?
+
+All the routes of the routes array
+
+```
+  routes: [
+    {path: '/', redirect: '/teams'},
+    {path: '/teams', component: TeamsList},
+	...
+  ]
+```
+
+are on the same level, they are root routs, they are siblings to each other. the <router-view> component in App.vue is responsible for all the root routes.
+
+To set up a nested route, you need to add it as the children
+
+```
+  routes: [
+    { path: '/', redirect: '/teams' }, 
+    {
+      path: '/teams', component: TeamsList, children: [ // /teams
+        { path: ':teamId', component: teamMembers, props: true } // /teams/t1
+      ]
+    },
+    ...
+  ]
+```
+
+#### not full segments
+
+Note that I removed the '/teams' part, as you just need to segment **after** parent segment.
+
+#### add corresponding `<router-view>`
+
+When you click a team, nothing happens. The reason is, since it is not a root route, it cannot be rendered into the `<router-view>`. Instead you need to a second `<router-view>`in the component(TeamList) where this route is defined as a child component.
+
+```
+<template>
+  <router-view></router-view>
+  <ul>
+    <teams-item
+      v-for="team in teams"
+      :key="team.id"
+      :name="team.name"
+      :team-id='team.id'
+      :member-count="team.members.length"
+    >
+    </teams-item>
+  </ul>
+</template>
+```
+
+#### parent is active if child is active
+
+when you didnt use nested routes, and you go to a team member, you notice the teams link is not highlighted. visit `teams/t1` will not make `teams` active (CSS style)
+
+but in nested route, visit `teams/t1` **does** make `teams` active (CSS style)
+
+However, `router-link-exact-active` will not be added to the generated <a> element. because of `exact` 
+
+
+

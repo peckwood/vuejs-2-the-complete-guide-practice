@@ -10,13 +10,17 @@ import notFound from '@/components/nav/NotFound.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    // {path: '/', redirect: '/teams'},
-    {path: '/teams', component: TeamsList, alias: '/'}, // our-domain.com/teams => TeamsList
-    {path: '/users', component: UsersList}, // our-domain.com/users => UsersList
+    { path: '/', redirect: '/teams' },
+    {
+      path: '/teams', component: TeamsList, children: [
+        { path: ':teamId', component: teamMembers, props: true } // our-domain.com/teams => TeamsList
+      ]
+    }, // our-domain.com/teams => TeamsList
+    { path: '/users', component: UsersList }, // our-domain.com/users => UsersList
     // new must be above :teamId, or it will be recognized as an id
     // {path: '/teams/new', component: TeamsList}, // our-domain.com/teams => TeamsList
-    {path: '/teams/:teamId', component: teamMembers, props: true}, // our-domain.com/teams => TeamsList
-    {path: '/:notFound(.*)', component: notFound}
+
+    { path: '/:notFound(.*)', component: notFound }
   ]
 });
 

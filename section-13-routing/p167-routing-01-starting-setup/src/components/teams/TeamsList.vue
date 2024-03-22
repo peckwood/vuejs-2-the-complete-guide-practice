@@ -1,4 +1,5 @@
 <template>
+  <router-view></router-view>
   <ul>
     <teams-item
       v-for="team in teams"
@@ -6,7 +7,8 @@
       :name="team.name"
       :team-id='team.id'
       :member-count="team.members.length"
-    ></teams-item>
+    >
+    </teams-item>
   </ul>
 </template>
 
