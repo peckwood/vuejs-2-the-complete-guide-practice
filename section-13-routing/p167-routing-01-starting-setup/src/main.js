@@ -7,6 +7,7 @@ import UsersList from '@/components/users/UsersList.vue';
 import teamMembers from '@/components/teams/TeamMembers.vue';
 import notFound from '@/components/nav/NotFound.vue';
 
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
