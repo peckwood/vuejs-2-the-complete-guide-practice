@@ -11,7 +11,13 @@ export default {
   props: ['name', 'memberCount', 'teamId'],
   computed:{
     teamMembersLink() {
-      return '/teams/' + this.teamId;
+      // return '/teams/' + this.teamId;
+      return {
+        name: 'team-members',
+        params: {
+          teamId: this.teamId
+        }
+      }
     }
   }
 };
