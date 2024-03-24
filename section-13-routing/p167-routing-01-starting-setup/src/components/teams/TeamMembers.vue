@@ -31,6 +31,8 @@ export default {
   created() {
     console.log('created with teamId', this.teamId)
     this.loadTeamMembers(this.teamId);
+    console.log('this.$route.query: ', this.$route.query)
+    console.log('this.$route.query.sort: ', this.$route.query.sort)
   },
   methods: {
     loadTeamMembers(teamIdProp){

@@ -14,10 +14,9 @@ export default {
       // return '/teams/' + this.teamId;
       return {
         name: 'team-members',
-        params: {
-          teamId: this.teamId
-        }
-      }
+        params: { teamId: this.teamId },
+        query: { sort: 'asc' }
+      };
     }
   }
 };

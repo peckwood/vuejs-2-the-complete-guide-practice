@@ -340,5 +340,98 @@ but in nested route, visit `teams/t1` **does** make `teams` active (CSS style)
 
 However, `router-link-exact-active` will not be added to the generated <a> element. because of `exact` 
 
+### 180 More Fun with Named Routes & Location Objects
 
+In bigger vue applications, if you have lots of nested routes, constructing links like recurring doing it like this
+
+```
+ <router-link :to="teamMembersLink">View Members</router-link>
+```
+
+```
+  computed:{
+    teamMembersLink() {
+      return '/teams/' + this.teamId;
+    }
+  }
+```
+
+can be cumbersome
+
+2 features for fixing this
+
+1. ` <router-link>`'s `to` prop can take more than string, it also takes location objects
+
+   ```
+   <router-link :to="teamMembersLink">View Members</router-link>
+   ```
+
+   ```
+       teamMembersLink() {
+         // return '/teams/' + this.teamId;
+         return {
+           name: 'team-members',
+           params: {
+             teamId: this.teamId
+           }
+         }
+       }
+   ```
+
+   
+
+2. we can assign names to routes
+
+   ```
+       {
+         name: 'teams',
+         path: '/teams', component: TeamsList, children: [
+           { name: 'team-members', path: ':teamId', component: teamMembers, props: true } // our-domain.com/teams => TeamsList
+         ]
+       },
+   ```
+
+#### advantages:
+
+1. readable and maintainable
+2. you can change path of routes without updating paths in components that use these routes
+
+#### navigating programmatically
+
+you can use the location object, as well
+
+```
+this.$router.push({
+        name: 'team-members',
+        params: {
+          teamId: this.teamId
+        }
+      });
+```
+
+### 181 Using query parameters
+
+add query parameter `sort` in `<team-item>`
+
+```
+    teamMembersLink() {
+      // return '/teams/' + this.teamId;
+      return {
+        name: 'team-members
+        query: { sort: 'asc' }
+      };
+    }
+```
+
+access query parameter in component `<team-members>`
+
+```
+  created() {
+    console.log('this.$route.query.sort: ', this.$route.query.sort)
+  },
+```
+
+#### Note: 
+
+query parameters are not provided as props, you can only access query parameter via `this.$route`
 
