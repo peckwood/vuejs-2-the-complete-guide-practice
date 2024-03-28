@@ -465,3 +465,62 @@ in route config, You need to use **components** instead of **component** to supp
 routes that still using **component** will go into the default (unamed) router view.
 
 So named router views can be helpful to allow you to construct more complex user interfaces where you wanna load **more than one component for a given path.**
+
+### 184 Controlling Scroll Behavior
+
+#### needs:
+
+scrollBehavior is a method that get called whenever your page changes.
+
+it takes 3 parameters automatically: to, from and savedPosition
+
+```
+  scrollBehavior(to, from, savedPosition) {
+    console.log('to', to, 'from', from, 'savedPosition', savedPosition);
+  }
+```
+
+to and from are route objects, which is the same as what you get from `this.$route`
+
+savedPosition is a object that has left and top
+
+```
+{
+	left: 0,
+	top: 100
+}
+```
+
+the saved button is only set this way: 
+
+1. you are at a position on page1
+2. you jump to page2
+3. you hit back button to go back to page1
+4. savedPosition shows your position when you were at page1 at step 1
+
+to always jump to top when you change page:
+
+```
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      left: 0,
+      top: 0
+    }
+  }
+```
+
+to go back to saved position if available:
+
+```
+  scrollBehavior(to, from, savedPosition) {
+    if(savedPosition){
+      return savedPosition;
+    }else {
+      return {
+        left: 0,
+        top: 0
+      }
+    }
+  }
+```
+

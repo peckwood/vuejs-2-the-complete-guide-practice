@@ -35,7 +35,19 @@ const router = createRouter({
     // {path: '/teams/new', component: TeamsList}, // our-domain.com/teams => TeamsList
 
     { path: '/:notFound(.*)', component: notFound }
-  ]
+  ],
+  linkActiveClass: 'active',
+  scrollBehavior(to, from, savedPosition) {
+    console.log('to', to, 'from', from, 'savedPosition', savedPosition);
+    if(savedPosition){
+      return savedPosition;
+    }else {
+      return {
+        left: 0,
+        top: 0
+      }
+    }
+  }
 });
 
 const app = createApp(App);
