@@ -38,7 +38,7 @@ const router = createRouter({
   ],
   linkActiveClass: 'active',
   scrollBehavior(to, from, savedPosition) {
-    console.log('to', to, 'from', from, 'savedPosition', savedPosition);
+    // console.log('to', to, 'from', from, 'savedPosition', savedPosition);
     if(savedPosition){
       return savedPosition;
     }else {
@@ -49,6 +49,38 @@ const router = createRouter({
     }
   }
 });
+
+  router.beforeEach(function(to, from, next) {
+    console.log('to:', to);
+    console.log('from:', from);
+    //allow navigation
+    next();
+
+    // allow
+    // next(true);
+
+    // cancel
+    // next(false);
+
+    //if you are navigating to 'team-members' page
+    // , you will proceed. If you are going anywhere else
+    // , you will navigate to 'team-members' page with t2 as teamId
+    /*    if (to.name === 'team-members') {
+          next();
+        }else{
+          next({
+            name: 'team-members',
+            params: {teamId: 't2'}
+          })
+        }*/
+
+    // pass string
+/*    if (to.path !== '/teams') {
+      next('/teams');
+    }else{
+      next();
+    }*/
+  })
 
 const app = createApp(App);
 

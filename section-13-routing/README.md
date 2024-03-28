@@ -524,3 +524,85 @@ to go back to saved position if available:
   }
 ```
 
+### 185 Introducing Navigation Guards
+
+guards are methods that called automatically by vue router when a navigation action started
+
+beforeEach is called before each navigation action
+
+```
+router.beforeEach(function(to, from, next) {
+  console.log('to:', to);
+  console.log('from:', from);
+})
+```
+
+you can use next to control the navigation:
+
+#### pass true or false
+
+to allow the navigation
+
+```
+next() or next(true)
+```
+
+to cancel the navigation
+
+```
+next(false);
+```
+
+#### pass string
+
+```
+    if (to.path !== '/teams') {
+      next('/teams');
+    }else{
+      next();
+    }
+```
+
+
+
+#### pass a location object
+
+the following code will:
+
+if you are navigating to 'team-members' page, you will proceed. If you are going anywhere else, you will navigate to 'team-members' page with t2 as teamId.
+
+```
+    if (to.name === 'team-members') {
+      next();
+    }else{
+      next({
+        name: 'team-members',
+        params: {teamId: 't2'}
+      })
+    }
+```
+
+#### avoid infinite loop
+
+just `next('/teams');` alone will not work:
+
+chatgpt:
+
+In your router's `beforeEach` navigation guard, you are using `next('/teams')` to redirect to the '/teams' route for all navigation. However, this approach might cause an infinite loop because every time you try to navigate to any route, it will redirect you back to '/teams', triggering the navigation guard again.
+
+To fix this issue, you should add a condition to check if you are already on the '/teams' route before redirecting. Here's an updated version of your `beforeEach` guard:
+
+```
+router.beforeEach(function(to, from, next) {
+  console.log('to:', to);
+  console.log('from:', from);
+
+  if (to.path !== '/teams') {
+    next('/teams');
+  } else {
+    next();
+  }
+});
+```
+
+With this modification, the `next('/teams')` redirection will only occur if you are not already on the '/teams' route, preventing the infinite loop.
