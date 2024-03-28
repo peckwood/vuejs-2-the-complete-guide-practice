@@ -435,3 +435,33 @@ access query parameter in component `<team-members>`
 
 query parameters are not provided as props, you can only access query parameter via `this.$route`
 
+### 182  Rendering Multiple Routes with Named Router Views
+
+We already have multiple router views in this app, one in App.vue, and one in TeamsList.vue. but they are not on the same level. But you can have multiple router-views on the same level.
+
+If you define 2 router views at the same level, every page loads twice
+
+But with multiple router views on the same level, You can load multiple components per routes, and then sent them to different router views. 
+
+You need to give router views **names**, just like **slots**. And just like slots, you can have 1 unnamed router view, which will be the default router view
+
+```
+  <footer>
+    <router-view name='footer'></router-view>
+  </footer>
+```
+
+in route config, You need to use **components** instead of **component** to support more than 1 component:
+
+```
+    {
+      path: '/users', components: {
+        default: UsersList,
+        footer: UsersFooter
+      }
+    },
+```
+
+routes that still using **component** will go into the default (unamed) router view.
+
+So named router views can be helpful to allow you to construct more complex user interfaces where you wanna load **more than one component for a given path.**

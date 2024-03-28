@@ -1,11 +1,13 @@
 import { createApp } from 'vue';
-import {createRouter, createWebHistory} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 import App from './App.vue';
 import TeamsList from '@/components/teams/TeamsList.vue';
 import UsersList from '@/components/users/UsersList.vue';
-import teamMembers from '@/components/teams/TeamMembers.vue';
+import TeamMembers from '@/components/teams/TeamMembers.vue';
 import notFound from '@/components/nav/NotFound.vue';
+import TeamsFooter from '@/components/teams/TeamsFooter.vue';
+import UsersFooter from '@/components/users/UsersFooter.vue';
 
 
 const router = createRouter({
@@ -14,11 +16,21 @@ const router = createRouter({
     { path: '/', redirect: '/teams' },
     {
       name: 'teams',
-      path: '/teams', component: TeamsList, children: [
-        { name: 'team-members', path: ':teamId', component: teamMembers, props: true } // our-domain.com/teams => TeamsList
+      path: '/teams'
+      , components: {
+        default: TeamsList,
+        footer: TeamsFooter
+      }
+      , children: [
+        { name: 'team-members', path: ':teamId', component: TeamMembers, props: true } // our-domain.com/teams => TeamsList
       ]
     }, // our-domain.com/teams => TeamsList
-    { path: '/users', component: UsersList }, // our-domain.com/users => UsersList
+    {
+      path: '/users', components: {
+        default: UsersList,
+        footer: UsersFooter
+      }
+    }, // our-domain.com/users => UsersList
     // new must be above :teamId, or it will be recognized as an id
     // {path: '/teams/new', component: TeamsList}, // our-domain.com/teams => TeamsList
 
@@ -26,7 +38,7 @@ const router = createRouter({
   ]
 });
 
-const app = createApp(App)
+const app = createApp(App);
 
 // use() connects our Vue app with a third party package
 app.use(router);
