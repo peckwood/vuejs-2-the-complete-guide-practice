@@ -17,6 +17,15 @@ export default {
     jump(){
       this.$router.push('/teams')
     }
+  },
+  beforeCreate(){
+    console.log('beforeCreate lifecycle hook')
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log('UserList Cmp beforeRouteEnter');
+    console.log('to', to);
+    console.log('from', from);
+    next();
   }
 };
 </script>

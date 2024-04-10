@@ -22,17 +22,23 @@ export default {
   },
   inject: ['teams', 'users'],
   props: ['teamId'],
+  created() {
+    console.log('created with teamId', this.teamId);
+    this.loadTeamMembers(this.teamId);
+    console.log('this.$route.query: ', this.$route.query);
+    console.log('this.$route.query.sort: ', this.$route.query.sort);
+  },
   watch: {
-    'teamId'(teamId){
-      console.log('prop teamId changed to', this.teamId)
+    'teamId'(teamId) {
+      console.log('prop teamId changed to', this.teamId);
       this.loadTeamMembers(teamId);
     }
   },
-  created() {
-    console.log('created with teamId', this.teamId)
-    this.loadTeamMembers(this.teamId);
-    console.log('this.$route.query: ', this.$route.query)
-    console.log('this.$route.query.sort: ', this.$route.query.sort)
+  beforeRouteUpdate(to, from, next){
+    console.log('TeamMembers Cmp beforeRouteUpdate')
+    console.log(to, from);
+    // this.loadTeamMembers(to.params.teamId);
+    next();
   },
   methods: {
     loadTeamMembers(teamIdProp){

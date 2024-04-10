@@ -606,3 +606,78 @@ router.beforeEach(function(to, from, next) {
 ```
 
 With this modification, the `next('/teams')` redirection will only occur if you are not already on the '/teams' route, preventing the infinite loop.
+
+Play
+
+### 186 Diving Deeper Into Navigation Guards
+
+### beforeEnter
+
+`beforeEach` is a global guard, it runs on every navigation action, no matter from which route to which route.
+
+you can add a guard on the route level:
+
+```
+    {
+      path: '/users', components: {
+        default: UsersList,
+        footer: UsersFooter
+      },
+      beforeEnter(to, from, next) {
+        next();
+      }
+    }
+```
+
+### beforeRouteEnter 
+
+you can alos add a navigation inside component
+
+beforeRouteEnter is trigged on entering
+
+```
+  beforeRouteEnter(to, from, next) {
+    next();
+  }
+```
+
+navigation guard execution order: 
+
+1. global
+2. route config level
+3. component level
+4. beforeRouteEnter is before any lifecycle hooks, since it decides if the navigation will allow or cancel
+
+### beforeRouteUpdate
+
+beforeRouteUpdate is used inside components that are resued, when we switch teams. like from `http://localhost:8080/teams/t1` to `http://localhost:8080/teams/t2`
+
+You can use beforeRouteUpdate to replace watching the teamId prop
+
+```
+  created() {
+    console.log('created with teamId', this.teamId);
+    // this.loadTeamMembers(this.teamId);
+    console.log('this.$route.query: ', this.$route.query);
+    console.log('this.$route.query.sort: ', this.$route.query.sort);
+  },
+  watch: {
+    'teamId'(teamId) {
+      console.log('prop teamId changed to', this.teamId);
+      this.loadTeamMembers(teamId);
+    }
+  },
+```
+
+can be replace with:
+
+```
+  beforeRouteUpdate(to, from, next){
+    console.log('TeamMembers Cmp beforeRouteUpdate')
+    console.log(to, from);
+    this.loadTeamMembers(to.params.teamId);
+    next();
+  },
+```
+
+but it will make it less flexible, since you can only use beforeRouteUpdate when you load component with routing, but you can use created and watch with or without.

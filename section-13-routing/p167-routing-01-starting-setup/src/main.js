@@ -29,6 +29,12 @@ const router = createRouter({
       path: '/users', components: {
         default: UsersList,
         footer: UsersFooter
+      },
+      beforeEnter(to, from, next) {
+        console.log('users beforeEnter');
+        console.log('to', to);
+        console.log('from', from);
+        next();
       }
     }, // our-domain.com/users => UsersList
     // new must be above :teamId, or it will be recognized as an id
@@ -51,6 +57,7 @@ const router = createRouter({
 });
 
   router.beforeEach(function(to, from, next) {
+    console.log('global beforeEach')
     console.log('to:', to);
     console.log('from:', from);
     //allow navigation
