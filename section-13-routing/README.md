@@ -694,3 +694,20 @@ router.afterEach((to, from) => {
 });
 ```
 
+### 188 Beyond Entering: Route Leave Guards
+
+beforeRouteLeave is a guard inside a component.
+
+It is trigged **before** any global or component guards, and allow you to choose if you want to confirm the navigation or not. It is useful in situation when you have a form on this page, there are unsaved data inside the form. and you accidently clicked a link to another page and may lose you unsaved changes.
+
+```
+  beforeRouteLeave(to, from, next){
+    console.log('UserList Cmp beforeRouteLeave');
+    console.log('to', to);
+    console.log('from', from);
+    const confirmLeave = confirm('Are you sure you want to leave?')
+    next(confirmLeave);
+  }
+```
+
+note that afterEach is triggered even if you cancel

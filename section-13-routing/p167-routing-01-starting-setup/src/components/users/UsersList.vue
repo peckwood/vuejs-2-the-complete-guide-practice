@@ -26,6 +26,13 @@ export default {
     console.log('to', to);
     console.log('from', from);
     next();
+  },
+  beforeRouteLeave(to, from, next){
+    console.log('UserList Cmp beforeRouteLeave');
+    console.log('to', to);
+    console.log('from', from);
+    const confirmLeave = confirm('Are you sure you want to leave?')
+    next(confirmLeave);
   }
 };
 </script>
