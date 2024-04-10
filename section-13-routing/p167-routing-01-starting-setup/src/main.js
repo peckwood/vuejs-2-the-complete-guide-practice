@@ -16,7 +16,10 @@ const router = createRouter({
     { path: '/', redirect: '/teams' },
     {
       name: 'teams',
-      path: '/teams'
+      path: '/teams',
+      meta: {
+        needsAuth: true
+      }
       , components: {
         default: TeamsList,
         footer: TeamsFooter
@@ -62,6 +65,7 @@ const router = createRouter({
     console.log('from:', from);
     //allow navigation
     next();
+    console.log('to.meta.needAuth', to.meta.needsAuth);
 
     // allow
     // next(true);

@@ -711,3 +711,25 @@ It is trigged **before** any global or component guards, and allow you to choose
 ```
 
 note that afterEach is triggered even if you cancel
+
+### 189 Utilizing Route Metadata
+
+meta is a property in a route that can store information of your choice, it is accessible inside $route
+
+```
+    {
+      name: 'teams',
+      path: '/teams',
+      meta: {
+        needsAuth: true
+      }
+      , components: {
+        default: TeamsList,
+        footer: TeamsFooter
+      }
+      , children: [
+        { name: 'team-members', path: ':teamId', component: TeamMembers, props: true } // our-domain.com/teams => TeamsList
+      ]
+    }
+```
+
