@@ -611,7 +611,7 @@ Play
 
 ### 186 Diving Deeper Into Navigation Guards
 
-### beforeEnter
+#### beforeEnter
 
 `beforeEach` is a global guard, it runs on every navigation action, no matter from which route to which route.
 
@@ -629,7 +629,7 @@ you can add a guard on the route level:
     }
 ```
 
-### beforeRouteEnter 
+#### beforeRouteEnter 
 
 you can alos add a navigation inside component
 
@@ -648,7 +648,7 @@ navigation guard execution order:
 3. component level
 4. beforeRouteEnter is before any lifecycle hooks, since it decides if the navigation will allow or cancel
 
-### beforeRouteUpdate
+#### beforeRouteUpdate
 
 beforeRouteUpdate is used inside components that are resued, when we switch teams. like from `http://localhost:8080/teams/t1` to `http://localhost:8080/teams/t2`
 
@@ -681,3 +681,16 @@ can be replace with:
 ```
 
 but it will make it less flexible, since you can only use beforeRouteUpdate when you load component with routing, but you can use created and watch with or without.
+
+### 187 The Global "afterEach" Guard
+
+afterEach guard doesnt have `next` param, it cannot allow or cancel a navigation. it could be useful for sending analytics data.
+
+```
+router.afterEach((to, from) => {
+  console.log('global afterEach');
+  console.log('to', to);
+  console.log('from', from);
+});
+```
+

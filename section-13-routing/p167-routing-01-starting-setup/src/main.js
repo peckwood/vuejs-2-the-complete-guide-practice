@@ -87,7 +87,13 @@ const router = createRouter({
     }else{
       next();
     }*/
-  })
+  });
+
+router.afterEach((to, from) => {
+  console.log('global afterEach');
+  console.log('to', to);
+  console.log('from', from);
+});
 
 const app = createApp(App);
 
