@@ -733,3 +733,14 @@ meta is a property in a route that can store information of your choice, it is a
     }
 ```
 
+### 190 Organizing Route Files
+
+#### pages folder
+
+to distinguish regular components and components loaded through router, routed components are moved to pages folder (optional)
+
+#### router.js file
+
+seperate js file for routing. 
+
+it contains all the routing logic and it imported into main.js
