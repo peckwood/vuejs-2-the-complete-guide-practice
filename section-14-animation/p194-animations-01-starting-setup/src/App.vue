@@ -4,7 +4,9 @@
     <button @click='animateBlock'>Animate</button>
   </div>
   <div class='container'>
-    <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
+    <transition>
+      <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
+    </transition>
     <button @click='toggleParagraph'>Toggle Paragraph</button>
   </div>
   <base-modal @close="hideDialog" v-if="dialogIsVisible">
@@ -14,7 +16,7 @@
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
-</template>  
+</template>
 
 <script>
 export default {
@@ -87,6 +89,29 @@ button:active {
 .animate {
   //transform: translateX(-150px);
   animation: my-slide-fade 0.3s ease-out forwards;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+.v-enter-active {
+  transition: all 5s ease-out;
+}
+.v-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.v-leave-active {
+  transition: all 5s ease-in;
+}
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
 }
 
 @keyframes my-slide-fade {
