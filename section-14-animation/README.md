@@ -71,5 +71,34 @@ element not mounted
 
 Note: this is only necessary for elements that use `v-if` or `v-show`
 
+### 199 CSS Animations with the Transition Component
 
+```
+    <transition>
+      <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
+    </transition>
+```
+
+```css
+.v-enter-active {
+  animation: my-slide-scale 0.3s ease-out;
+}
+.v-leave-active {
+  animation: my-slide-scale 0.3s ease-out;
+}
+@keyframes my-slide-scale {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  70% {
+    transform: translateX(-120px) scale(1.2);
+  }
+
+  100% {
+    transform: translateX(-150px) scale(1);
+  }
+}
+```
+
+we don't need `forwards` because after animation ends, `active` class  will be removed and component  will not remember the animation
 
