@@ -102,3 +102,40 @@ Note: this is only necessary for elements that use `v-if` or `v-show`
 
 we don't need `forwards` because after animation ends, `active` class  will be removed and component  will not remember the animation
 
+### 200 Using Custom CSS Class Names
+
+If you have multiple elements that need to have `<transition>`, you cant let them all use the same CSS classes `v-enter-*`...
+
+`v-enter-*` is the **default** class
+
+to specify a **custom prefix**:
+
+```
+<transition name='para'>
+      <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
+</transition>
+```
+
+```
+.para-enter-active {
+  animation: my-slide-scale 0.3s ease-out;
+}
+.para-leave-active {
+  animation: my-slide-scale 0.3s ease-out;
+}
+```
+
+**totaly custom CSS class names**:
+
+```
+    <transition name='para' enter-active-class='my-para-enter-active-class-name'>
+      <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
+    </transition>
+```
+
+```
+.my-para-enter-active-class-name {
+  animation: my-slide-scale 0.3s ease-out;
+}
+```
+

@@ -4,7 +4,7 @@
     <button @click='animateBlock'>Animate</button>
   </div>
   <div class='container'>
-    <transition>
+    <transition name='para' enter-active-class='my-para-enter-active-class-name'>
       <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
     </transition>
     <button @click='toggleParagraph'>Toggle Paragraph</button>
@@ -95,7 +95,7 @@ button:active {
   opacity: 0;
   transform: translateY(-30px);
 }*/
-.v-enter-active {
+.my-para-enter-active-class-name {
   animation: my-slide-scale 0.3s ease-out;
 }
 /*.v-enter-to {
@@ -106,7 +106,7 @@ button:active {
   opacity: 1;
   transform: translateY(0);
 }*/
-.v-leave-active {
+.para-leave-active {
   animation: my-slide-scale 0.3s ease-out;
 }
 /*.v-leave-to {
