@@ -139,3 +139,41 @@ to specify a **custom prefix**:
 }
 ```
 
+### 201 Example: Animating a Modal
+
+You can use `<transition>` on custom components just like elements
+
+```
+  <transition name='modal'>
+    <base-modal @close='hideDialog' v-if='dialogIsVisible'>
+      <p>This is a test dialog!</p>
+      <button @click='hideDialog'>Close it!</button>
+    </base-modal>
+  </transition>
+```
+
+but your custom class prefix will fall through to the root element of component. 
+
+> A "fallthrough attribute" is an attribute or `v-on` event listener that is passed to a component, but is not explicitly declared in the receiving component's [props](https://vuejs.org/guide/components/props) or [emits](https://vuejs.org/guide/components/events#declaring-emitted-events). Common examples of this include `class`, `style`, and `id` attributes.
+
+`<base-modal>` has 2 root elements
+
+```
+<template>
+  <div class="backdrop" @click="$emit('close')"></div>
+  <dialog open>
+    <slot></slot>
+  </dialog>
+</template>
+```
+
+we have to comment out `<div>` to make `<dialog>` animate
+
+the `<transition>` component wants one direct child element, event though `<base-model>` satisfies, it is only a wrapper of 2 root elements.
+
+2 choices:
+
+1. we wrap div and dialog each in their own transition component
+2. we wrap dialog in transition inside BaseModal.vue, we choose this one
+
+dialogIsVisible was used to control if base-modal exists, now we pass it as prop to control if dialog exists, also div, to control the backdrop
