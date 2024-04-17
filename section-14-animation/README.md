@@ -207,3 +207,49 @@ dialogIsVisible was used to control if base-modal exists, now we pass it as prop
 }
 ```
 
+### 203 Using Transition Events
+
+sometimes you want to use JS 
+
+1. as part of transition
+2. control the entire transition
+3. change style through JS
+4. do something when an animation starts or ends
+
+you can achieve this with the help of transition events
+
+```
+    <transition
+      name='para'
+      enter-active-class='my-para-enter-active-class-name'
+      @before-enter='beforeEnter'
+      @enter='enter'
+      @after-enter='afterEnter'
+      @before-leave='beforeLeave'
+      @leave='leave'
+      @after-leave='afterLeave'
+    >
+```
+
+```
+    beforeEnter(ele){
+      console.log('beforeEnter', ele)
+    },
+    enter(ele){
+      console.log('enter', ele);
+    },
+    afterEnter(){
+      console.log('afterEnter');
+    },
+    beforeLeave(){
+      console.log('beforeLeave')
+    },
+    leave(){
+      console.log('leave')
+    },
+    afterLeave(){
+      console.log('afterLeave')
+    },
+```
+
+the event listeners take an element, you can perform actions on it.
