@@ -177,3 +177,33 @@ the `<transition>` component wants one direct child element, event though `<base
 2. we wrap dialog in transition inside BaseModal.vue, we choose this one
 
 dialogIsVisible was used to control if base-modal exists, now we pass it as prop to control if dialog exists, also div, to control the backdrop
+
+### 202 Transitioning Between Multiple Elements
+
+1. the `<transition>` component only accepts one direct child element. But there is an **exception**, if you guarantee that at most 1 is added to the dom, you can have multiple elements.
+
+2. we need to use v-else to give vue a clear signal : v-else
+3. we need to set the mode to `out-in`  to avoid both buttons are shown
+
+```
+    <transition name='fade-button' mode='out-in'>
+      <button @click='showUsers' v-if='!usersAreVisible'>Show Users</button>
+      <button @click='hideUsers' v-else>Hide Users</button>
+    </transition>
+```
+
+```
+.fade-button-enter-from, .fade-button-leave-to {
+ opacity: 0;
+}
+.fade-button-enter-to, .fade-button-leave-from {
+  opacity: 1;
+}
+.fade-button-enter-active {
+  transition: opacity 0.5s ease-out;
+}
+.fade-button-leave-active {
+  transition: opacity 0.5s ease-in;
+}
+```
+
