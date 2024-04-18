@@ -5,6 +5,7 @@
   </div>
   <div class='container'>
     <transition
+      :css='false'
       @before-enter='beforeEnter'
       @enter='enter'
       @after-enter='afterEnter'
@@ -99,7 +100,7 @@ export default {
       }, this.interval);
     },
     afterLeave(){
-      console.log('afterLeave')
+      console.log('afterLeave');
     },
     // only available with v-show transitions
     leaveCancelled(){

@@ -277,4 +277,29 @@ if you dont call `done()`, it will execute instantly with enter hook.
 
 There is a problem, when you click the button before the transition ends, it will flicker, since both transitions are playing.
 
-we can use `@enter-cancelled` and `@leave-cancelled`
+we can use `@enter-cancelled` and `@leave-cancelled`, note that `@leave-cancelled` is only available with `v-show` animations
+
+
+
+### 205 Disabling CSS Transitions
+
+in 204, I disconnected the connection between `<transition>` and css styles by deleting `name` and `enter-active-class`:
+
+```
+    <transition
+      name='para'
+      enter-active-class='my-para-enter-active-class-name'
+    >
+```
+
+there is a special attribute that disable CSS transitions:
+
+```
+    <transition
+      :css='false'
+    >
+```
+
+With this, this tells vue to skip css analysis step and thus improves performance
+
+If you control animation through JS only, you should set it to false, to optimize performance
