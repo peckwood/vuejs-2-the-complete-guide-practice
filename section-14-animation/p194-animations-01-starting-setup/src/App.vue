@@ -5,16 +5,16 @@
   </div>
   <div class='container'>
     <transition
-      name='para'
-      enter-active-class='my-para-enter-active-class-name'
       @before-enter='beforeEnter'
       @enter='enter'
       @after-enter='afterEnter'
+      @enter-cancelled='enterCancelled'
       @before-leave='beforeLeave'
       @leave='leave'
       @after-leave='afterLeave'
+      @leave-cancelled='leaveCancelled'
     >
-      <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
+      <p v-show='paragraphIsVisible'>this is only sometimes visible...</p>
     </transition>
     <button @click='toggleParagraph'>Toggle Paragraph</button>
   </div>
@@ -34,33 +34,80 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       usersAreVisible: true,
       paragraphIsVisible: true,
       animatedBlock: false,
-      dialogIsVisible: false
+      dialogIsVisible: false,
+      enterIntervalId: null,
+      leaveIntervalId: null,
+      interval: 300
     };
   },
   methods: {
     beforeEnter(ele){
       console.log('beforeEnter', ele)
     },
-    enter(ele){
+    enter(ele, done){
       console.log('enter', ele);
+      let level = 1;
+      const oldOpacity = Number(ele.style.opacity);
+      this.enterIntervalId = setInterval(() => {
+        ele.style.opacity = oldOpacity + level * 0.1;
+        console.log('ele.style.opacity', ele.style.opacity)
+        level++;
+        if(ele.style.opacity >= 1){
+          ele.style.opacity = 1;
+          clearInterval(this.enterIntervalId);
+          done();
+        }
+      }, this.interval);
     },
     afterEnter(){
       console.log('afterEnter');
     },
+    enterCancelled(){
+      console.log('enterCancelled');
+      if(this.enterIntervalId){
+        clearInterval(this.enterIntervalId);
+        this.enterIntervalId = null;
+      }
+    },
     beforeLeave(){
       console.log('beforeLeave')
     },
-    leave(){
-      console.log('leave')
+    leave(ele, done){
+      console.log('leave');
+      let oldOpacity = Number(ele.style.opacity);
+      if(!oldOpacity){
+        oldOpacity = 1;
+      }
+      console.log('oldOpacity', oldOpacity);
+      let level = 1;
+      this.leaveIntervalId = setInterval(() => {
+        ele.style.opacity = oldOpacity - level * 0.1;
+        console.log('ele.style.opacity', ele.style.opacity)
+        level++;
+        if(ele.style.opacity <= 0){
+          ele.style.opacity = 0;
+          clearInterval(this.leaveIntervalId);
+          done();
+        }
+      }, this.interval);
     },
     afterLeave(){
       console.log('afterLeave')
+    },
+    // only available with v-show transitions
+    leaveCancelled(){
+      console.log('leaveCancelled')
+      if(this.leaveIntervalId){
+        clearInterval(this.leaveIntervalId);
+        this.leaveIntervalId = null;
+      }
     },
     showUsers(){
       this.usersAreVisible = true;

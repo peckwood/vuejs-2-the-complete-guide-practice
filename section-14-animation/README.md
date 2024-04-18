@@ -253,3 +253,28 @@ you can achieve this with the help of transition events
 ```
 
 the event listeners take an element, you can perform actions on it.
+
+### 204  Building JavaScript Transitions (instead of CSS)
+
+you need to tell Vue when you are done in this hook if you have JS-based animations. you dont need this if you have CSS-based animations. 
+
+```
+    enter(ele, done){
+      console.log('enter', ele);
+      let level = 1;
+      const intervalId = setInterval(() => {
+        ele.style.opacity = level * 0.05;
+        level++;
+        if(ele.style.opacity >= 1){
+          clearInterval(intervalId);
+          done();
+        }
+      }, 20);
+    }
+```
+
+if you dont call `done()`, it will execute instantly with enter hook.
+
+There is a problem, when you click the button before the transition ends, it will flicker, since both transitions are playing.
+
+we can use `@enter-cancelled` and `@leave-cancelled`
