@@ -5,14 +5,14 @@
   </div>
   <div class='container'>
     <transition
-      name='para'
-      enter-active-class='my-para-enter-active-class-name'
       @before-enter='beforeEnter'
       @enter='enter'
       @after-enter='afterEnter'
       @before-leave='beforeLeave'
       @leave='leave'
       @after-leave='afterLeave'
+      @enter-cancelled='enterCancelled'
+      @leave-cancelled='leaveCancelled'
     >
       <p v-if='paragraphIsVisible'>this is only sometimes visible...</p>
     </transition>
@@ -34,33 +34,74 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       usersAreVisible: true,
       paragraphIsVisible: true,
       animatedBlock: false,
-      dialogIsVisible: false
+      dialogIsVisible: false,
+      enterIntervalId: null,
+      leaveIntervalId: null
     };
   },
   methods: {
     beforeEnter(ele){
       console.log('beforeEnter', ele)
     },
-    enter(ele){
+    enter(ele, done){
       console.log('enter', ele);
+      let level = 1;
+      const oldOpacity = ele.style.opacity;
+      this.enterIntervalId = setInterval(() => {
+        ele.style.opacity = oldOpacity + level * 0.01;
+        level++;
+        if(ele.style.opacity >= 1){
+          clearInterval(this.enterIntervalId);
+          done();
+        }
+      }, 20);
     },
     afterEnter(){
       console.log('afterEnter');
     },
+    enterCancelled(){
+      console.log('enterCancelled');
+      if(this.enterIntervalId){
+        clearInterval(this.enterIntervalId);
+        this.enterIntervalId = null;
+      }
+    },
     beforeLeave(){
       console.log('beforeLeave')
     },
-    leave(){
-      console.log('leave')
+    leave(ele, done){
+      console.log('leave');
+      let oldOpacity = ele.style.opacity;
+      if(!oldOpacity){
+        oldOpacity = 1;
+      }
+      console.log('oldOpacity', oldOpacity);
+      let level = 1;
+      this.leaveIntervalId = setInterval(() => {
+        ele.style.opacity = oldOpacity - level * 0.01;
+        level++;
+        if(ele.style.opacity <= 0){
+          clearInterval(this.leaveIntervalId);
+          done();
+        }
+      }, 20);
     },
     afterLeave(){
       console.log('afterLeave')
+    },
+    leaveCancelled(){
+      console.log('leaveCancelled')
+      if(this.leaveIntervalId){
+        clearInterval(this.leaveIntervalId);
+        this.leaveIntervalId = null;
+      }
     },
     showUsers(){
       this.usersAreVisible = true;
