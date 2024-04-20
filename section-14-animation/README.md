@@ -303,3 +303,38 @@ there is a special attribute that disable CSS transitions:
 With this, this tells vue to skip css analysis step and thus improves performance
 
 If you control animation through JS only, you should set it to false, to optimize performance
+
+### 207 Animating Lists with "transition-group"
+
+`<transition>` can only work with one element, but `<transiton-group>`, which is used to work with multiple elements. It can <u>work with multiple elements at the same time</u>.
+
+It is capable of animating individual lists items, but also multiple items at the same time.
+
+```
+  <transition-group tag='ul' name='user-list'>
+    <li v-for='user in users' :key='user' @click='removeUser(user)'>
+      {{ user }}
+    </li>
+  </transition-group>
+```
+
+```css
+.user-list-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+.user-list-enter-active {
+  transition: all 0.5s ease-out;
+}
+.user-list-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+```
+
+
+
+Important: `<transition>` renders no element in the DOM. but `<transition-group>` will render an element to the DOM and you can control which element it is by giving it `tag` prop. we give it `ul` and it can replace the outer `ul` element. you can use any valid html element or component here
+
+otherwise, `<transition-group>` works pretty much like transition. it also add CSS classes, it checks CSS code to see how long an animation takes
+
