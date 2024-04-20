@@ -306,7 +306,7 @@ If you control animation through JS only, you should set it to false, to optimiz
 
 ### 207 Animating Lists with "transition-group"
 
-`<transition>` can only work with one element, but `<transiton-group>`, which is used to work with multiple elements. It can <u>work with multiple elements at the same time</u>.
+`<transition>` can only work with one element or two alternating items, but `<transiton-group>`, which is used to work with multiple elements. It can <u>work with multiple elements at the same time</u>.
 
 It is capable of animating individual lists items, but also multiple items at the same time.
 
@@ -338,3 +338,39 @@ Important: `<transition>` renders no element in the DOM. but `<transition-group>
 
 otherwise, `<transition-group>` works pretty much like transition. it also add CSS classes, it checks CSS code to see how long an animation takes
 
+### 208 Animate List Item Movement
+
+We notice that when we add/remove, there is a snapping/jumping behavior, how to handle this?
+
+#### .*-move{
+
+#### }
+
+Note that whilst we are adding or removing one element at a time, <u>we are animating multiple elements simultaneously</u> because other elements also need to switch position. `<transition-group` also offers class `*-move` class, which which allows us to control the animation of the other elements, which are not getting added or removed, but which also might need to move around to make place for the new element or to fill up the space of the leaving element.
+
+vue will use `transform` under the hood to move them
+
+so we can use it:
+
+```
+.user-list-move {
+  transition: transform 0.5s ease-out;
+}
+```
+
+
+
+we need to add position: absolute to ` .user-list-leave-active` to also let the move css work when we delete elements
+
+```
+.user-list-leave-active {
+  transition: all 0.5s ease-in;
+  position: absolute;
+}
+```
+
+#### `<transition-group>` vs `<transiton>`
+
+`<transition-group>` is the component you should use if you want to add multiple items.
+
+If you have one item or two alternating items you want to animate, `<transition>` is the component you should use.
