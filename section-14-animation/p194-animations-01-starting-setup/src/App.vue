@@ -1,5 +1,12 @@
 <template>
   <div class="container">
+  <router-view v-slot='{ Component }'>
+    <transition name='fade-button' mode='out-in'>
+      <component :is="Component" />
+    </transition>
+  </router-view>
+  </div>
+  <div class="container">
     <users-list></users-list>
   </div>
   <div class="container">
@@ -139,6 +146,7 @@ export default {
 </script>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -214,10 +222,10 @@ button:active {
   opacity: 1;
 }
 .fade-button-enter-active {
-  transition: opacity 0.5s ease-out;
+  transition: opacity 1s ease-out;
 }
 .fade-button-leave-active {
-  transition: opacity 0.5s ease-in;
+  transition: opacity 1s ease-in;
 }
 
 @keyframes my-slide-scale {

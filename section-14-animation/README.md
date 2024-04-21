@@ -374,3 +374,59 @@ we need to add position: absolute to ` .user-list-leave-active` to also let the 
 `<transition-group>` is the component you should use if you want to add multiple items.
 
 If you have one item or two alternating items you want to animate, `<transition>` is the component you should use.
+
+### 209 Animating Route Changes
+
+You dont animate `<router-view>` by wrapping it inside `<transition>`  it is the way in older version of vue, but not anymore
+
+you will get warning in console:
+
+```
+vue-router.mjs:35 [Vue Router warn]: <router-view> can no longer be used directly inside <transition> or <keep-alive>.
+Use slot props instead:
+
+<router-view v-slot="{ Component }">
+  <transition>
+    <component :is="Component" />
+  </transition>
+</router-view>
+```
+
+you also need to use mode since there are 2 alternating components:
+
+```
+  <router-view v-slot='{ Component }'>
+    <transition name='fade-button' mode='out-in'>
+      <component :is="Component" />
+    </transition>
+  </router-view>
+```
+
+```
+.fade-button-enter-from, .fade-button-leave-to {
+ opacity: 0;
+}
+.fade-button-enter-to, .fade-button-leave-from {
+  opacity: 1;
+}
+.fade-button-enter-active {
+  transition: opacity 0.5s ease-out;
+}
+.fade-button-leave-active {
+  transition: opacity 0.5s ease-in;
+}
+```
+
+#### remove initial animation
+
+Note that when you first start the page, the animation happens, the reason is with vue router, the first act of route is an empty route. That means that technically when the app starts, the vue-router goes from no route to the chosen route for to given path. 
+
+To fix this, you can mount the app after the router is successfully evaluated, so the router will not go from the empty to the selected page:
+
+```
+app.use(router);
+router.isReady().then( () => {
+  app.mount('#app');
+});
+```
+
