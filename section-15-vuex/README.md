@@ -55,5 +55,15 @@ vuex is to overcome:
    <h3>{{ $store.state.counter}}</h3>
    ```
 
-7. 
+7. to change the store value:
+
+   ```
+       addOne(){
+         this.$store.state.counter++;
+       }
+   ```
+
+   
+
+8. 
 
