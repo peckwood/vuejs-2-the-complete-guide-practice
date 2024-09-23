@@ -430,3 +430,13 @@ router.isReady().then( () => {
 });
 ```
 
+### 210 An Important Note on Animated Route Changes
+
+Your route components **must NOT have multiple root elements!**
+
+> [210. An Important Note on Animated Route Changes](https://www.udemy.com/course/vuejs-2-the-complete-guide/learn/lecture/21879540#notes)
+### 210 An Important Note on Animated Route Changes
+
+Your route components **must NOT have multiple root elements!**
+
+> [210. An Important Note on Animated Route Changes](https://www.udemy.com/course/vuejs-2-the-complete-guide/learn/lecture/21879540#notes)

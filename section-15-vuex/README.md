@@ -1,6 +1,20 @@
 # Section 15: Vuex
 
 
+### 214 What & Why?
+
+Vuex is a library for managing **global** state
+
+vuex is to overcome:
+
+
+
+| problems                                    |                                                              |                                                 |
+| ------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------- |
+| fat components                              | unpredictable                                                | error-prone                                     |
+| components contains too much data and logic | its not always obvious where data(state) gets changed in which way | accidental or missed state updates are possible |
+| with vuex                                   |                                                              |                                                 |
+| outsourced state management                 | predictable statement / flow                                 | clearly defined data flow: less errors          |
 
 ### 215 Creating & Using a Store
 
