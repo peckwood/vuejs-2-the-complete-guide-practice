@@ -75,3 +75,33 @@ And from inside our components, we should, in the end, just trigger those mutati
 
 If you have multiple locations that add one to counter, if you need to add TWO instead, you have edit multiple places.
 
+to use mutations:
+
+**definition**
+
+```
+const store = createStore({
+  state(){
+    return {
+      counter: 0
+    }
+  },
+  mutations: {
+    increment(state) {
+      state.counter = state.counter + 2;
+    }
+  }
+});
+
+```
+
+
+
+**use:**
+
+```
+addOne(){
+      this.$store.commit('increment');
+    }
+```
+
