@@ -105,3 +105,25 @@ addOne(){
     }
 ```
 
+### 218 Passing Data to Mutations with Payloads
+
+- payload is like a method parameter
+- it's the second parameter of mutation
+- it can be anything, string, number or an object
+
+**definition**
+
+```
+    increase(state, payload) {
+      state.counter = state.counter + payload;
+    }
+```
+
+**usage:**
+
+```
+addOne(){
+      this.$store.commit('increase', 10);
+    }
+```
+
