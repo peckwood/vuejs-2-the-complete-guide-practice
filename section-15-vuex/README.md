@@ -65,5 +65,13 @@ vuex is to overcome:
 
    
 
-8. 
+### 216 Connecting components to state
+
+### 217 mutations
+
+Mutations are clearly defined methods, which have the logic to update the state.
+
+And from inside our components, we should, in the end, just trigger those mutations instead of directly manipulating the state.
+
+If you have multiple locations that add one to counter, if you need to add TWO instead, you have edit multiple places.
 
