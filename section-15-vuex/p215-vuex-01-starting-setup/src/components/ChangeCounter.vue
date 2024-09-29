@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <button @click='addOne'>Add 10</button>
+  <button @click='addOne'>ChangeCounter Add 10</button>
 </template>
 
 <style scoped>

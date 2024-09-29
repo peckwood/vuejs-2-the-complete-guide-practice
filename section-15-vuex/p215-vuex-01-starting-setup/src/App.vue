@@ -2,7 +2,7 @@
   <base-container title="Vuex">
     <the-counter></the-counter>
     <favorite-value></favorite-value>
-    <button @click='addOne'>Add 2</button>
+    <button @click='addOne'>App.Vue Add 2</button>
     <change-counter></change-counter>
   </base-container>
 </template>
@@ -23,7 +23,14 @@ export default {
 
   methods: {
     addOne(){
-      this.$store.commit('increase', 2);
+
+      // this.$store.commit('increase', {value: 2});
+
+      // this.$store.commit({type: 'increase',value: 2});
+
+      // this.$store.dispatch('increment');
+      // this.$store.dispatch('increase', {value: 2});
+      this.$store.commit({type: 'increase',value: 2});
     }
   }
 };

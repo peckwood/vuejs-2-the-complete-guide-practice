@@ -127,3 +127,92 @@ addOne(){
     }
 ```
 
+### 219 Introducing Getters - A Better Way Of Getting Data
+
+problem: if you need to get `counter * 2` instead of `counter`, and you have multiple places that access counter with `this.$store.state.counter;`, you have to modify each
+
+so we use getters
+
+getters:
+
+```
+  getters: {
+    finalCounter(state){
+      return state.counter * 2;
+    }
+  }
+```
+
+use getters:
+
+```
+counter(){
+      return this.$store.getters.finalCounter;
+    }
+```
+
+#### getter that based on other getters
+
+```
+  getters: {
+    finalCounter(state){
+      return state.counter * 2;
+    },
+    normalizedCounter(_, getters){
+      const finalCounter = getters.finalCounter;
+      if(finalCounter < 0){
+        return 0;
+      }else if(finalCounter> 100){
+        return 100;
+      }else{
+        return finalCounter;
+      }
+    }
+  }
+
+```
+
+### 220 Running Async Code with Actions
+
+mutations are synchronized, you are not allowed to have asynchronized code in there.
+
+What if you need to run async code? like sending a http request and mutate after you receive response?
+
+You can use actions that allow async code to trigger mutations.
+
+![image-20240930062818898](README.assets/image-20240930062818898.png)
+
+it's considered a good practice in general, to always put Actions between Components and Mutations, even though Components could commit Mutations themselves.
+
+action can use the same name as mutation.
+
+```javascript
+  mutations: {
+    increment(state) {
+      state.counter = state.counter + 2;
+    },
+    increase(state, payload) {
+      state.counter = state.counter + payload.value;
+    }
+  },
+    actions: {
+    increment(context){
+      setTimeout(function(){
+        context.commit('increment');
+      }, 2000);
+    },
+    increase(context, payload){
+      context.commit('increase', payload);
+    }
+
+  }
+```
+
+how to use action:
+
+just like calling mutation but with dispatch instead of commit
+
+```
+this.$store.commit({type: 'increase',value: 2});
+```
+
