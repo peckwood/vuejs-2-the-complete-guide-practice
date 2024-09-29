@@ -1,15 +1,15 @@
 <script>
 export default {
   methods: {
-    addOne(){
-      this.$store.commit('increase', 10);
+    add(){
+      this.$store.dispatch('increase', {type: 'increase',value: 10});
     }
   }
 };
 </script>
 
 <template>
-  <button @click='addOne'>Add 10</button>
+  <button @click='add'>ChangeCounter Add 10</button>
 </template>
 
 <style scoped>
