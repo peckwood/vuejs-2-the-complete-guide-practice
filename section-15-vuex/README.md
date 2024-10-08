@@ -202,7 +202,9 @@ action can use the same name as mutation.
       }, 2000);
     },
     increase(context, payload){
-      context.commit('increase', payload);
+      setTimeout(function(){
+        context.commit('increase', payload);
+      }, 2000);      
     }
 
   }
@@ -216,3 +218,23 @@ just like calling mutation but with dispatch instead of commit
 this.$store.dispatch({type: 'increase',value: 2});
 ```
 
+### 221 Understanding the Action "Context"
+
+we automatically get context object from action method:
+
+```
+actions: {
+    increase(context, payload){
+        console.log('context', context)
+    }
+}
+```
+
+it has 
+
+- `commit` method
+- `dispatch` method, you can dispatch another action from this action, you can dispatch multiple actions
+- `getter` method for getting values in case you need some value inside action
+- `state` , and you can also directly tap into the state, in case getting access to the getters might not be enough. you should not manipulate the state from inside the action though. **always** use a mutation for that
+
+With state, mutations, actions and getters, we get the core concepts vuex uses to manage state application wide which you can then use conveniently from inside any component.
