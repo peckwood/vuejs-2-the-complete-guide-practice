@@ -1,5 +1,5 @@
 <template>
-  <h3>{{ counter }}</h3>
+  <h3>I am two times of store counter: {{ counter }}</h3>
   <p>We do more...</p>
 </template>
 
