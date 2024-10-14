@@ -238,3 +238,92 @@ it has
 - `state` , and you can also directly tap into the state, in case getting access to the getters might not be enough. you should not manipulate the state from inside the action though. **always** use a mutation for that
 
 With state, mutations, actions and getters, we get the core concepts vuex uses to manage state application wide which you can then use conveniently from inside any component.
+
+### 222 Using Mapper Helpers - utility feature
+
+#### mapGetters
+
+```
+  computed: {
+    counter(){
+      return this.$store.getters.finalCounter;
+    }
+  },
+```
+
+can be simplified to 
+
+```
+import {mapGetters} from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters(['finalCounter'])
+  },
+};
+```
+
+mapGetters method takes a array of parameters, which contains all the getters you want to expose
+
+ if you do not want to use default name:
+
+```
+<h3>I am two times of store counter: {{ counter }}</h3>
+```
+
+```
+  computed: {
+    ...mapGetters({
+      counter: 'finalCounter'
+    })
+  },
+```
+
+
+
+#### mapActions
+
+actions have similar utility features: mapActions
+
+```
+<button @click='add'>ChangeCounter Add 10</button>
+```
+
+```
+  methods: {
+    add(){
+      this.$store.dispatch('increase', {type: 'increase',value: 10});
+    }
+  }
+```
+
+can be replaced by
+
+```
+<button @click='increase({value: 11})'>ChangeCounter Add 11 with mapAction</button>
+```
+
+```
+  methods: {
+    ...mapActions(['increase'])
+  }
+```
+
+or if you want to map to another name:
+
+```
+<button @click='add2({value: 11})'>ChangeCounter Add 11 with mapAction</button>
+```
+
+```
+  methods: {
+    add(){
+      this.$store.dispatch('increase', {type: 'increase',value: 10});
+    },
+    ...mapActions({
+      add2: 'increase',
+      inc: 'increment'
+    })
+  }
+```
+
