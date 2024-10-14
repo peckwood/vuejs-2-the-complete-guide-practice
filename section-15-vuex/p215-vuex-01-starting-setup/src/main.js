@@ -6,7 +6,8 @@ import App from './App.vue';
 const store = createStore({
   state(){
     return {
-      counter: 0
+      counter: 0,
+      loggedIn: false
     }
   },
   mutations: {
@@ -15,6 +16,12 @@ const store = createStore({
     },
     increase(state, payload) {
       state.counter = state.counter + payload.value;
+    },
+    logIn(state) {
+      state.loggedIn = true;
+    },
+    logOut(state) {
+      state.loggedIn = false;
     }
   },
   getters: {
@@ -30,6 +37,9 @@ const store = createStore({
       }else{
         return finalCounter;
       }
+    },
+    isLoggedIn(state){
+      return state.loggedIn;
     }
   },
   actions: {
@@ -43,6 +53,16 @@ const store = createStore({
       setTimeout(function(){
         context.commit('increase', payload);
       }, 2000);
+    },
+    logIn(context) {
+      setTimeout(function() {
+        context.commit('logIn');
+      }, 1000);
+    },
+    logOut(context) {
+      setTimeout(function() {
+        context.commit('logOut');
+      }, 1000);
     }
 
   }
