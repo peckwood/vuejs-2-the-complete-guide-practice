@@ -3,11 +3,10 @@ import {createStore} from 'vuex';
 
 import App from './App.vue';
 
-const store = createStore({
+const counterModule = {
   state(){
     return {
-      counter: 0,
-      loggedIn: false
+      counter: 0
     }
   },
   mutations: {
@@ -17,12 +16,19 @@ const store = createStore({
     increase(state, payload) {
       state.counter = state.counter + payload.value;
     },
-    logIn(state) {
-      state.loggedIn = true;
+  },
+  actions: {
+    increment(context){
+      setTimeout(function(){
+        context.commit('increment');
+      }, 2000);
     },
-    logOut(state) {
-      state.loggedIn = false;
-    }
+    increase(context, payload){
+      console.log('action context', context);
+      setTimeout(function(){
+        context.commit('increase', payload);
+      }, 2000);
+    },
   },
   getters: {
     finalCounter(state){
@@ -38,22 +44,32 @@ const store = createStore({
         return finalCounter;
       }
     },
+  }
+};
+
+const store = createStore({
+  modules: {
+    numbers: counterModule
+  },
+  state(){
+    return {
+      loggedIn: false
+    }
+  },
+  mutations: {
+    logIn(state) {
+      state.loggedIn = true;
+    },
+    logOut(state) {
+      state.loggedIn = false;
+    }
+  },
+  getters: {
     isLoggedIn(state){
       return state.loggedIn;
     }
   },
   actions: {
-    increment(context){
-      setTimeout(function(){
-        context.commit('increment');
-      }, 2000);
-    },
-    increase(context, payload){
-      console.log('action context', context);
-      setTimeout(function(){
-        context.commit('increase', payload);
-      }, 2000);
-    },
     logIn(context) {
       setTimeout(function() {
         context.commit('logIn');

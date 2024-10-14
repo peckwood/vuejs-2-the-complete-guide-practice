@@ -327,3 +327,65 @@ or if you want to map to another name:
   }
 ```
 
+### 224 Organizing your Store with Modules
+
+store can be made up of multiple modules. you automatically have one module, the root module
+
+we will take counter into its own module:
+
+```js
+// create module object
+const counterModule = {
+  state(){
+    return {
+      counter: 0
+    }
+  },
+  mutations: {
+    increment(state) {
+      state.counter = state.counter + 2;
+    },
+    increase(state, payload) {
+      state.counter = state.counter + payload.value;
+    },
+  },
+  actions: {
+    increment(context){
+      setTimeout(function(){
+        context.commit('increment');
+      }, 2000);
+    },
+    increase(context, payload){
+      console.log('action context', context);
+      setTimeout(function(){
+        context.commit('increase', payload);
+      }, 2000);
+    },
+  },
+  getters: {
+    finalCounter(state){
+      return state.counter * 2;
+    },
+    normalizedCounter(_, getters){
+      const finalCounter = getters.finalCounter;
+      if(finalCounter < 0){
+        return 0;
+      }else if(finalCounter> 100){
+        return 100;
+      }else{
+        return finalCounter;
+      }
+    },
+  }
+};
+
+// add module into store
+const store = createStore({
+  modules: {
+    numbers: counterModule
+  },
+  state(){
+  ...
+```
+
+everything works as before, as modules merged into a store are all merged on the same level
