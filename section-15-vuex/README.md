@@ -389,3 +389,30 @@ const store = createStore({
 ```
 
 everything works as before, as modules merged into a store are all merged on the same level
+
+### 	225 Understanding Local Module State
+
+the state inside of a module, is actually treated as a local state, inside of the module.
+
+Mutations actions and getters are global, you can access them as before on the main store.
+
+But the **state is local to the module it belongs to**
+
+note that when you access state inside actions with `context.state`, access state inside mutations, you are also accessing the **local** state
+
+#### how to getting access to state that not part of this module?
+
+use rootState or rootGetters
+
+```
+testAuth2(_state, _getters, rootState){
+      return rootState.loggedIn;
+}
+
+testAuth2(_state, _getters, _rootState, rootGetters){
+	return rootGetters.isLoggedIn;
+}
+```
+
+
+

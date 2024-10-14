@@ -44,6 +44,13 @@ const counterModule = {
         return finalCounter;
       }
     },
+    testAuth1(state){
+      return state.loggedIn;
+    },
+    testAuth2(_state, _getters, rootState){
+      return rootState.loggedIn;
+      // return rootGetters.isLoggedIn;
+    }
   }
 };
 
@@ -67,7 +74,7 @@ const store = createStore({
   getters: {
     isLoggedIn(state){
       return state.loggedIn;
-    }
+    },
   },
   actions: {
     logIn(context) {
