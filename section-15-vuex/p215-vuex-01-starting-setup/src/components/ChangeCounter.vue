@@ -4,11 +4,11 @@ import { mapActions } from 'vuex';
 export default {
   methods: {
     add(){
-      this.$store.dispatch('increase', {type: 'increase',value: 10});
+      this.$store.dispatch({type: 'numbers/increase',value: 10});
     },
 
     // ...mapActions(['increase'])
-    ...mapActions({
+    ...mapActions('numbers', {
       add2: 'increase',
       inc: 'increment'
     })

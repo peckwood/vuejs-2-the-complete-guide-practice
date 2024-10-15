@@ -9,7 +9,7 @@ import {mapGetters} from 'vuex';
 export default {
   computed: {
     ...mapGetters({
-      counter: 'finalCounter'
+      counter: 'numbers/finalCounter'
     })
   },
 };

@@ -414,5 +414,76 @@ testAuth2(_state, _getters, _rootState, rootGetters){
 }
 ```
 
+### 226 Namespacing Modules
 
+besides the state, you can make the entire module local.
+
+but why we need that?
+
+as application grows, you would have name clashes. you might use same getter/action name in different modules of the same store. for example, we had a login action here, in the counter module,that would be clashing with the login action we got in our main store.
+
+Because at the moment, besides the state, everything is merged together into one object basically.
+
+#### to avoid that, you can namespace modules.
+
+turn on namespacing for a moduel, we add `namespaced: true`
+
+```
+const counterModule = {
+  namespaced: true,
+  state(){
+  ...
+```
+
+#### changes in getters usage:
+
+```
+this.$store.getters.counter;
+```
+
+is changed to
+
+```
+this.$store.getters['numbers/counter'];
+```
+
+#### changes in mapGetters:
+
+```
+...mapGetters({
+	counter: 'finalCounter'
+})
+```
+
+```
+...mapGetters({
+	counter: 'numbers/finalCounter'
+})
+```
+
+#### changes in actions:
+
+```
+this.$store.dispatch({type: 'increase',value: 10});
+```
+
+```
+this.$store.dispatch({type: 'numbers/increase',value: 10});
+```
+
+#### changes in actionGetters:
+
+```
+...mapActions({
+      add2: 'increase',
+      inc: 'increment'
+    })
+```
+
+```
+...mapActions('numbers', {
+      add2: 'increase',
+      inc: 'increment'
+    })
+```
 
