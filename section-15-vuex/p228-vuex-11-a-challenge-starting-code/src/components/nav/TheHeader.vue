@@ -29,15 +29,19 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['isLoggedIn']),
+    // ...mapGetters({'auth/isLoggedIn'}
+    // this won't work, you have to use this if you namespace:
+    ...mapGetters({
+      isLoggedIn: 'auth/isLoggedIn'}
+    ),
     cart(){
-      return this.$store.getters.cart;
+      return this.$store.getters['cart/cart'];
     },
   },
   methods: {
     ...mapActions({
-      login2: 'login',
-      logout2: 'logout'
+      login2: 'auth/login',
+      logout2: 'auth/logout'
     })
   }
 };

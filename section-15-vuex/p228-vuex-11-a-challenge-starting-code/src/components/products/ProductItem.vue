@@ -20,12 +20,11 @@
 
 <script>
 export default {
-  // inject: ['addProductToCart'],
   props: ['id', 'image', 'title', 'price', 'description'],
   methods: {
     addToCart() {
       this.$store.dispatch({
-        type: 'addProductToCart',
+        type: 'cart/addProductToCart',
         value: {
           id: this.id,
           image: this.image,

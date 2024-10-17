@@ -1,5 +1,6 @@
 
 const cartModule = {
+  namespaced: true,
   state(){
     return {
       cart: {

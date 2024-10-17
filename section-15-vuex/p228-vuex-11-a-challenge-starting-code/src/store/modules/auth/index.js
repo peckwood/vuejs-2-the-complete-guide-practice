@@ -1,5 +1,6 @@
 
 const authModule = {
+  namespaced: true,
   state(){
     return {
       isLoggedIn: false,

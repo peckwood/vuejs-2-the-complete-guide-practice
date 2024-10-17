@@ -1,6 +1,7 @@
 import productGetter from './getters'
 
 const productModule = {
+  namespaced: true,
   state(){
     return {
       products: [
