@@ -2,20 +2,22 @@
 const cartModule = {
   state(){
     return {
-      items: [],
-      total: 0,
-      qty: 0
+      cart: {
+        items: [],
+        total: 0,
+        qty: 0
+      }
     };
   },
   mutations: {
     addProductToCart(state, payload){
       const productData = payload.value;
-      const productInCartIndex = state.items.findIndex(
+      const productInCartIndex = state.cart.items.findIndex(
         (ci) => ci.productId === productData.id
       );
 
       if (productInCartIndex >= 0) {
-        state.items[productInCartIndex].qty++;
+        state.cart.items[productInCartIndex].qty++;
       } else {
         const newItem = {
           productId: productData.id,
@@ -24,15 +26,33 @@ const cartModule = {
           price: productData.price,
           qty: 1,
         };
-        state.items.push(newItem);
+        state.cart.items.push(newItem);
       }
-      state.qty++;
-      state.total += productData.price;
-    }
+      state.cart.qty++;
+      state.cart.total += productData.price;
+    },
+    removeProductFromCart(state, payload) {
+      const prodId = payload.prodId;
+      const productInCartIndex = state.cart.items.findIndex(
+        (cartItem) => cartItem.productId === prodId
+      );
+      const prodData = state.cart.items[productInCartIndex];
+      state.cart.items.splice(productInCartIndex, 1);
+      state.cart.qty -= prodData.qty;
+      state.cart.total -= prodData.price * prodData.qty;
+    },
   },
   actions: {
     addProductToCart(context, payload){
       context.commit('addProductToCart', payload);
+    },
+    removeProductFromCart(context, payload){
+      context.commit('removeProductFromCart', payload);
+    }
+  },
+  getters: {
+    cart(state) {
+      return state.cart;
     }
   }
 
