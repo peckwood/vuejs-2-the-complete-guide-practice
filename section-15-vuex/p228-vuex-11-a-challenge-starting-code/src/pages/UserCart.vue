@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Your Cart</h2>
-    <h3>Total Amount: <base-badge mode="elegant">${{ cart.total }}</base-badge></h3>
+    <h3>Total Amount: <base-badge mode="elegant">${{ cartTotalAmount }}</base-badge></h3>
     <ul>
       <cart-item
         v-for="item in cart.items"
@@ -27,8 +27,8 @@ export default {
     cart(){
       return this.$store.getters['cart/cart'];
     },
-    cartTotal() {
-      return this.cart.total.toFixed(2);
+    cartTotalAmount(){
+      return this.$store.getters['cart/cartTotalAmount']
     }
   }
 };

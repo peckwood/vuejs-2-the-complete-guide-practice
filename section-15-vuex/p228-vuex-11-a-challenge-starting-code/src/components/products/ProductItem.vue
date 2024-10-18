@@ -25,12 +25,7 @@ export default {
     addToCart() {
       this.$store.dispatch({
         type: 'cart/addProductToCart',
-        value: {
-          id: this.id,
-          image: this.image,
-          title: this.title,
-          price: this.price,
-        }
+        productId: this.id
       })
     },
   },

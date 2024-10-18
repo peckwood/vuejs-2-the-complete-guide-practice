@@ -218,6 +218,14 @@ just like calling mutation but with dispatch instead of commit
 this.$store.dispatch({type: 'increase',value: 2});
 ```
 
+or
+
+```
+this.$store.dispatch('increase', {value: 2});
+```
+
+
+
 ### 221 Understanding the Action "Context"
 
 we automatically get context object from action method:

@@ -6,15 +6,21 @@ const cartModule = {
       cart: {
         items: [],
         total: 0,
-        qty: 0
+        qty: 0,
       }
     };
   },
   mutations: {
     addProductToCart(state, payload){
-      const productData = payload.value;
+      const allProducts = payload.allProducts;
+      const productId = payload.productId;
+
+      const productData = allProducts.findIndex(
+        (ci) => ci.productId === productId
+      );
+
       const productInCartIndex = state.cart.items.findIndex(
-        (ci) => ci.productId === productData.id
+        (ci) => ci.productId === productId
       );
 
       if (productInCartIndex >= 0) {
@@ -45,6 +51,12 @@ const cartModule = {
   },
   actions: {
     addProductToCart(context, payload){
+      // the following won't work, context is local context, its getters only have cart getters
+      // const allProducts = context.getters['product/products2']
+
+      // use rootState
+      const allProducts = context.rootState.product.products;
+      payload.allProducts = allProducts;
       context.commit('addProductToCart', payload);
     },
     removeProductFromCart(context, payload){
@@ -54,6 +66,9 @@ const cartModule = {
   getters: {
     cart(state) {
       return state.cart;
+    },
+    cartTotalAmount(state){
+      return state.cart.total.toFixed(2)
     }
   }
 
