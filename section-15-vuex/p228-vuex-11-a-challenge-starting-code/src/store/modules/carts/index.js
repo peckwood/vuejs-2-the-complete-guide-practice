@@ -12,13 +12,8 @@ const cartModule = {
   },
   mutations: {
     addProductToCart(state, payload){
-      const allProducts = payload.allProducts;
       const productId = payload.productId;
-
-      const productData = allProducts.findIndex(
-        (ci) => ci.productId === productId
-      );
-
+      const productData = payload;
       const productInCartIndex = state.cart.items.findIndex(
         (ci) => ci.productId === productId
       );
@@ -54,10 +49,11 @@ const cartModule = {
       // the following won't work, context is local context, its getters only have cart getters
       // const allProducts = context.getters['product/products2']
 
-      // use rootState
-      const allProducts = context.rootState.product.products;
+      // use rootGetters
+      const allProducts = context.rootGetters['productNamespace/products2'];
+      const product = allProducts.find(p => p.id === payload.productId);
       payload.allProducts = allProducts;
-      context.commit('addProductToCart', payload);
+      context.commit('addProductToCart', product);
     },
     removeProductFromCart(context, payload){
       context.commit('removeProductFromCart', payload);

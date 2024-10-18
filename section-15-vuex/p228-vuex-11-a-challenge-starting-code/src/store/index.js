@@ -9,7 +9,7 @@ const store = createStore({
   },
   modules: {
     cart: cartModule,
-    product: productModule,
+    productNamespace: productModule,
     auth: authModule
   },
 });
