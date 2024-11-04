@@ -38,9 +38,11 @@ This approach has one problem: All pages share the same url, we cannot share any
    
    const app = createApp(App)
    
+   app.use(router);
+   
    app.mount('#app');
    ```
-
+   
    
 
 ### 169. Registering & Rendering Routes
@@ -99,10 +101,10 @@ app.mount('#app');
 
 If you load a component through routing, you dont need to register it as a global or local component.
 
-`<router-view>`是vuex专有组件
+`<router-view>`是vue-router专有组件
 
 ```
-<!--    <component :is="activePage"></component>-->
+<!--<component :is="activePage"></component>-->
 <router-view></router-view>
 ```
 
@@ -292,7 +294,7 @@ All the routes of the routes array
   ]
 ```
 
-are on the same level, they are root routs, they are siblings to each other. the <router-view> component in App.vue is responsible for all the root routes.
+are on the same level, they are root routes, they are siblings to each other. the <router-view> component in App.vue is responsible for all the root routes.
 
 To set up a nested route, you need to add it as the children
 
@@ -314,7 +316,7 @@ Note that I removed the '/teams' part, as you just need to segment **after** par
 
 #### add corresponding `<router-view>`
 
-When you click a team, nothing happens. The reason is, since it is not a root route, it cannot be rendered into the `<router-view>`. Instead you need to a second `<router-view>`in the component(TeamList) where this route is defined as a child component.
+When you click a team, nothing happens. The reason is, since it is not a root route, it cannot be rendered into the `<router-view>`. Instead you need to add a second `<router-view>`in the component(TeamList) where this route is defined as a child component.
 
 ```
 <template>
@@ -370,7 +372,7 @@ can be cumbersome
        teamMembersLink() {
          // return '/teams/' + this.teamId;
          return {
-           name: 'team-members',
+           name: 'team-members', //team-members是对应的子router的name
            params: {
              teamId: this.teamId
            }
@@ -439,7 +441,7 @@ query parameters are not provided as props, you can only access query parameter 
 
 We already have multiple router views in this app, one in App.vue, and one in TeamsList.vue. but they are not on the same level. But you can have multiple router-views on the same level.
 
-If you define 2 router views at the same level, every page loads twice
+If you define 2 router views at the same level, every page loads twice (appear twice for each <router-view>)
 
 But with multiple router views on the same level, You can load multiple components per routes, and then sent them to different router views. 
 
