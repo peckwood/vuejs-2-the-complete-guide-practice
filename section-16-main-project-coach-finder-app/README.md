@@ -65,3 +65,24 @@
    ```
 
 3. created router.js and added routes
+
+### 239 Adding Route Page Components
+
+1. I created empty vue pages for each component
+2. linked them to different routes inside router.js
+3. created App.vue
+4. edited main.js so that App.vue is loaded and it uses router
+
+### 240 Working on the Main Layout & Styling
+
+1. I created `TheHeader` component, which includes multiple `router-link` to navigate to different pages
+2. imported TheHeader into App.vue, so that it is global
+
+### 241 Wiring Up Pages
+
+something to note about child routes:
+
+1. it will not be loaded to replace the parent route
+2. it needs a new <router-view> inside the parent component
+3. 
+
