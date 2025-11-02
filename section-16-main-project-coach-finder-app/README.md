@@ -84,5 +84,35 @@ something to note about child routes:
 
 1. it will not be loaded to replace the parent route
 2. it needs a new <router-view> inside the parent component
-3. 
+
+### 242 Adding Vuex and Coach Data - complete
+
+### 243 Working on the Coaches List and List Items - complete
+
+### 244 Adding a Couple of Base Components (Base Card, Base Button, Base Badge)
+
+### 245 Building the Coach Detail Component
+
+#### how to get router path variable as a prop?
+
+add prop: true
+
+```
+{
+            path: '/coaches/:id'
+            , component: CoachDetail
+            , props: true
+            , children: [
+                {path: 'contact', component: ContactCoach},// contact specific coach, /coaches/1/contact
+            ]
+        },
+```
+
+#### how to get current url?
+
+```
+this.$route.path
+```
+
+
 
