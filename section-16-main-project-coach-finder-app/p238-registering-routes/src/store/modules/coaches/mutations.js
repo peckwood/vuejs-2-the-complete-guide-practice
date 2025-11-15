@@ -1,5 +1,5 @@
 export default {
-    mutateCoaches(state, coaches){
-        return state.coaches = coaches;
+    registerCoach(state, payload){
+        state.coaches.push(payload)
     },
 }

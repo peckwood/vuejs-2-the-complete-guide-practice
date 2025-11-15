@@ -120,5 +120,42 @@ this.$route.path
 
 ### 247 Registering as a Coach: The Form
 
-没什么特别想记的
+to forward automatically after register a coach
+
+```
+this.$router.push('/coaches')
+```
+
+or
+
+```
+this.$router.replace('/coaches')
+```
+
+### 248 Adding Coaches to Vuex
+
+remember how to use getters:
+
+- vue
+
+```
+this.$store.getters['coaches/isCoach']
+```
+
+- inside getter.js
+
+```
+export default {
+    coaches(state){
+        return state.coaches;
+    },
+    isCoach(state, getters, rootState, rootGetters){
+        let isCoach = false;
+        isCoach = getters.coaches.some(coach => {
+            return coach.id === rootGetters.userId;
+        });
+        return isCoach
+    }
+}
+```
 

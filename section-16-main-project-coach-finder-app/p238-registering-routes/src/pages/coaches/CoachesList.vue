@@ -7,7 +7,13 @@
   <base-card>
     <div class="controls">
       <base-button mode="outline">Refresh</base-button>
-      <base-button link="true" to="/register">Register as a coach</base-button>
+      <base-button
+          :link="true"
+          to="/register"
+          v-if="canRegister"
+      >
+        Register as a coach
+      </base-button>
     </div>
     <section>
       <ul v-if="hasCoaches">
@@ -50,14 +56,17 @@ export default {
       let filteredCoaches = this.$store.getters['coaches/coaches']
           .filter(coach => {
             return coach.areas.some(area => {
-              return this.filters[area];
+              return this.filters[area] != null;
             });
           });
-      console.log('filteredCoaches', filteredCoaches)
       return filteredCoaches
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches']
+    },
+    canRegister(){
+      const isCoach = this.$store.getters['coaches/isCoach'];
+      return !isCoach;
     }
   },
   methods: {

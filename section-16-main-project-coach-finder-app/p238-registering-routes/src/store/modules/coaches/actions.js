@@ -1,5 +1,12 @@
 export default {
-    updateCoaches(context, coaches){
-        context.commit('mutateCoaches', coaches)
+    registerCoach(context, data){
+        context.commit('registerCoach', {
+            id: context.rootGetters.userId,
+            firstName: data.first,
+            lastName: data.last,
+            description: data.desc,
+            hourlyRate: data.rate,
+            areas: data.areas
+        })
     }
 }
